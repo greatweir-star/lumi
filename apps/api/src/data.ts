@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import type { AiNativeRuntimeBlueprint } from "@lumiforge/agent-runtime";
+import type { AiNativeRuntimeBlueprint, SkillTestCase } from "@lumiforge/agent-runtime";
 import type { AgentTemplate, ClawPackage, HardwareTarget, Project } from "@lumiforge/core";
 
 export type CapabilityCatalogItem = {
@@ -24,6 +24,17 @@ export type SkillCatalogItem = {
   installSource: string;
   trustLevel: string;
   mvpStatus: string;
+};
+
+export type CompatibilityMatrixItem = {
+  id: string;
+  hardwareClaw: string;
+  runtimeProfile: string;
+  skillIds: string[];
+  status: string;
+  coverage: Record<string, string>;
+  metrics: Record<string, number | string | null>;
+  notes: string;
 };
 
 const root = process.cwd().includes("apps/api") ? join(process.cwd(), "../..") : process.cwd();
@@ -50,6 +61,14 @@ export const skillCatalog: SkillCatalogItem[] = JSON.parse(
 
 export const clawPackages: ClawPackage[] = JSON.parse(
   readFileSync(join(root, "datasets/claws/claws.json"), "utf-8")
+);
+
+export const skillTests: SkillTestCase[] = JSON.parse(
+  readFileSync(join(root, "datasets/skill-tests/skill-tests.json"), "utf-8")
+);
+
+export const compatibilityMatrix: CompatibilityMatrixItem[] = JSON.parse(
+  readFileSync(join(root, "datasets/compatibility/compatibility-matrix.json"), "utf-8")
 );
 
 export const projects = new Map<string, Project>();
