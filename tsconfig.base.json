@@ -12,9 +12,9 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@lingji/core": ["packages/core/src/index.ts"],
-      "@lingji/firmware-adapters": ["packages/firmware-adapters/src/index.ts"],
-      "@lingji/agent-runtime": ["packages/agent-runtime/src/index.ts"]
+      "@lumiforge/core": ["./packages/core/src/index.ts"],
+      "@lumiforge/firmware-adapters": ["./packages/firmware-adapters/src/index.ts"],
+      "@lumiforge/agent-runtime": ["./packages/agent-runtime/src/index.ts"]
     }
   }
 }
