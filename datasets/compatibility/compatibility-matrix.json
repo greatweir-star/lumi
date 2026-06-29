@@ -1,0 +1,53 @@
+[
+  {
+    "id": "esp32-s3-display-devkit-agent-c-core",
+    "hardwareClaw": "esp32-s3-display-devkit-lumiforge-agent-c",
+    "runtimeProfile": "lumiforge-agent-c",
+    "skillIds": ["daily_greeting", "button_chat", "memory_capture", "mcp_bridge"],
+    "status": "draft",
+    "coverage": {
+      "agentCore": "host_demo",
+      "eventRouter": "partial",
+      "memory": "host_demo",
+      "tools": "host_demo",
+      "mcp": "planned",
+      "lua": "planned",
+      "im": "planned",
+      "browserFlash": "planned"
+    },
+    "metrics": {
+      "flashKb": null,
+      "ramKb": null,
+      "bootMs": null,
+      "eventLatencyMs": null,
+      "skillPassRate": 0
+    },
+    "notes": "Host demo exists. ESP-IDF adapter skeleton added. Need real board test."
+  },
+  {
+    "id": "xiaozhi-voice-kit-agent-c-core",
+    "hardwareClaw": "xiaozhi-esp32-voice-kit-lumiforge-agent-c",
+    "runtimeProfile": "lumiforge-agent-c",
+    "skillIds": ["button_chat", "memory_capture", "mcp_bridge"],
+    "status": "draft",
+    "coverage": {
+      "agentCore": "host_demo",
+      "eventRouter": "partial",
+      "memory": "host_demo",
+      "tools": "host_demo",
+      "mcp": "planned",
+      "lua": "planned",
+      "im": "planned",
+      "browserFlash": "planned",
+      "audio": "planned"
+    },
+    "metrics": {
+      "flashKb": null,
+      "ramKb": null,
+      "bootMs": null,
+      "eventLatencyMs": null,
+      "skillPassRate": 0
+    },
+    "notes": "Voice pipeline, codec and wake-word integration pending."
+  }
+]
