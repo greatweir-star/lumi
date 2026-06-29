@@ -17,9 +17,10 @@ export default function HomePage() {
       <nav className="nav">
         <div className="brand"><div className="logo" /> 灵机工坊 LumiForge</div>
         <div className="nav-links">
+          <a href="/runtime">Runtime Blueprint</a>
+          <a href="/debugger">Device Debugger</a>
           <a href="#devices">硬件中心</a>
           <a href="#templates">模板市场</a>
-          <a href="#pipeline">AI Native 架构</a>
           <a href="/studio">Agent Studio</a>
         </div>
       </nav>
@@ -33,8 +34,9 @@ export default function HomePage() {
             MVP 目标对齐 ESP-Claw 能力面，再扩展到多硬件、多固件、多模板生态。
           </p>
           <div className="actions">
-            <a className="btn primary" href="/studio">进入 Agent Studio</a>
-            <a className="btn" href="#pipeline">查看 AI Native 架构</a>
+            <a className="btn primary" href="/runtime">查看 Runtime Blueprint</a>
+            <a className="btn" href="/debugger">打开 Device Debugger</a>
+            <a className="btn" href="/studio">进入 Agent Studio</a>
           </div>
         </div>
         <div className="panel deploy-card">
