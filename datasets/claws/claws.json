@@ -1,0 +1,71 @@
+[
+  {
+    "id": "esp32-s3-display-devkit-lumiforge-agent-c",
+    "name": "ESP32-S3 Display DevKit LumiForge Agent C Claw",
+    "kind": "hardware",
+    "target": {
+      "chip": "ESP32-S3",
+      "board": "ESP32-S3 Display DevKit",
+      "vendor": "Generic"
+    },
+    "quality": {
+      "level": "draft",
+      "score": 25,
+      "tested": false,
+      "notes": "Initial clean-room LumiForge Agent C target. Host demo exists; ESP-IDF adapter pending."
+    },
+    "capabilities": [
+      "display",
+      "touch",
+      "microphone",
+      "speaker",
+      "wifi",
+      "button",
+      "led",
+      "web_serial_flash",
+      "agent_runtime"
+    ],
+    "runtimeProfiles": ["lumiforge-agent-c", "esp-claw-compatible"],
+    "skills": ["daily_greeting", "button_chat", "memory_capture", "mcp_bridge"],
+    "artifacts": [
+      { "type": "board_profile", "path": "templates/devices/devices.json" },
+      { "type": "runtime_profile", "path": "templates/runtime/esp-claw-compatible.json" },
+      { "type": "agent_c_runtime", "path": "firmware/lumiforge-agent-c" }
+    ],
+    "provenance": {
+      "source": "Inspired by ESP-Claw and MimiClaw capability boundaries; implementation is LumiForge clean-room rewrite.",
+      "license": "project-license-pending",
+      "rewritePolicy": "clean_room_rewrite",
+      "notes": "Do not copy upstream source. Record every compatibility decision and test result."
+    }
+  },
+  {
+    "id": "xiaozhi-esp32-voice-kit-lumiforge-agent-c",
+    "name": "XiaoZhi ESP32 Voice Kit LumiForge Agent C Claw",
+    "kind": "hardware",
+    "target": {
+      "chip": "ESP32-S3",
+      "board": "XiaoZhi ESP32 Voice Kit",
+      "vendor": "XiaoZhi Community"
+    },
+    "quality": {
+      "level": "draft",
+      "score": 18,
+      "tested": false,
+      "notes": "Voice-first Claw placeholder. Audio pipeline adapter pending."
+    },
+    "capabilities": ["microphone", "speaker", "wifi", "button", "led", "agent_runtime"],
+    "runtimeProfiles": ["lumiforge-agent-c", "xiaozhi-compatible"],
+    "skills": ["button_chat", "memory_capture", "mcp_bridge"],
+    "artifacts": [
+      { "type": "board_profile", "path": "templates/devices/devices.json" },
+      { "type": "agent_c_runtime", "path": "firmware/lumiforge-agent-c" }
+    ],
+    "provenance": {
+      "source": "Community-compatible target definition. No upstream code copied.",
+      "license": "project-license-pending",
+      "rewritePolicy": "clean_room_rewrite",
+      "notes": "Needs microphone, codec and wake-word integration notes."
+    }
+  }
+]
