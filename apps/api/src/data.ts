@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import type { AgentTemplate, HardwareTarget, Project } from "@lingji/core";
+import type { AgentTemplate, HardwareTarget, Project } from "@lumiforge/core";
 
 const root = process.cwd().includes("apps/api") ? join(process.cwd(), "../..") : process.cwd();
 
