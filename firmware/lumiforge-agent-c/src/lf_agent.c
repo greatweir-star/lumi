@@ -6,7 +6,7 @@ static void lf_copy_text(lf_text_t *target, const char *source) {
   if (!target) return;
   if (!source) source = "";
   (void)snprintf(target->data, sizeof(target->data), "%s", source);
-  target->len = strnlen(target->data, sizeof(target->data));
+  target->len = strlen(target->data);
 }
 
 lf_status_t lf_agent_init(lf_agent_context_t *agent, const lf_agent_config_t *config) {
@@ -67,7 +67,7 @@ static lf_status_t lf_agent_build_prompt(lf_agent_context_t *agent, const lf_eve
     (int)event->type,
     event->payload.data
   );
-  prompt->len = strnlen(prompt->data, sizeof(prompt->data));
+  prompt->len = strlen(prompt->data);
   return LF_OK;
 }
 
