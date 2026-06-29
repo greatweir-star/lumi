@@ -6,6 +6,7 @@ idf_component_register(
     "../../src/lf_memory.c"
     "../../src/lf_platform.c"
     "../../src/lf_tool.c"
+    "../../src/lf_platform_stdio.c"
     "lf_platform_espidf.c"
   INCLUDE_DIRS
     "../../include"
