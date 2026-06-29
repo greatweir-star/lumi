@@ -1,0 +1,13 @@
+idf_component_register(
+  SRCS
+    "../../src/lf_agent.c"
+    "../../src/lf_capability.c"
+    "../../src/lf_event.c"
+    "../../src/lf_memory.c"
+    "../../src/lf_platform.c"
+    "../../src/lf_tool.c"
+    "lf_platform_espidf.c"
+  INCLUDE_DIRS
+    "../../include"
+    "."
+)
