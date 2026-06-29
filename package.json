@@ -8,7 +8,10 @@
     "build": "pnpm -r build",
     "lint": "pnpm -r lint",
     "typecheck": "pnpm -r typecheck",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "claw:stats": "node tools/clawctl.mjs stats",
+    "claw:validate": "node tools/clawctl.mjs validate",
+    "claw:write-result": "node tools/clawctl.mjs write-result"
   },
   "packageManager": "pnpm@9.12.0",
   "devDependencies": {
