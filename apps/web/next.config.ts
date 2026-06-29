@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@lingji/core"]
+  transpilePackages: ["@lumiforge/core"]
 };
 
 export default nextConfig;
