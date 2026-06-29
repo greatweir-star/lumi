@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LumiForge Hardware Test Result",
+  "type": "object",
+  "required": ["id", "status", "capturedAt", "source", "metrics"],
+  "properties": {
+    "id": { "type": "string" },
+    "status": { "enum": ["draft", "passing", "failing", "blocked"] },
+    "capturedAt": { "type": "string" },
+    "source": { "type": "string" },
+    "hardwareClaw": { "type": "string" },
+    "runtimeProfile": { "type": "string" },
+    "skillId": { "type": "string" },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "latencyMs": { "type": ["number", "null"] },
+        "flashKb": { "type": ["number", "null"] },
+        "ramKb": { "type": ["number", "null"] },
+        "bootMs": { "type": ["number", "null"] },
+        "passRate": { "type": ["number", "null"] }
+      }
+    },
+    "logs": { "type": "array", "items": { "type": "string" } },
+    "notes": { "type": "string" }
+  }
+}
