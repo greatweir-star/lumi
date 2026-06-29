@@ -2,7 +2,7 @@ import type { FastifyInstance } from "fastify";
 import { compileProjectToAgentConfig } from "@lumiforge/agent-runtime";
 import { DeployRequestSchema, ProjectSchema, scoreHardwareForTemplate } from "@lumiforge/core";
 import { defaultFirmwareAdapters } from "@lumiforge/firmware-adapters";
-import { agentTemplates, capabilityCatalog, clawPackages, devices, projects, runtimeBlueprints, skillCatalog } from "./data";
+import { agentTemplates, capabilityCatalog, clawPackages, devices, projects, runtimeBlueprints, skillCatalog, skillsLabPackages } from "./data";
 import { registerDatasetRoutes } from "./dataset-routes";
 import { registerSkillsLabRoutes } from "./skills-lab-routes";
 import { mockRuntimeState } from "./runtime-state";
@@ -53,6 +53,7 @@ export async function registerRoutes(app: FastifyInstance) {
     runtimeFsSeed: getDefaultRuntime().fileSystem,
     agentConfig: null,
     skills: skillCatalog,
+    skillsLabPackages,
     claws: clawPackages,
     routerRules: mockRuntimeState.eventRouter,
     memorySeed: getDefaultRuntime().memory,
