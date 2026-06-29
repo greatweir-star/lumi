@@ -37,6 +37,34 @@ export type CompatibilityMatrixItem = {
   notes: string;
 };
 
+export type SkillsLabPackage = {
+  id: string;
+  name: string;
+  kind: "skill" | "lua_script" | "bundle" | "template";
+  description: string;
+  author: string;
+  entry: string;
+  tags: string[];
+  assets: Array<{ type: string; path: string; sha256?: string }>;
+  compatibility: {
+    runtimeProfiles: string[];
+    hardwareClaws: string[];
+    requiredCapabilities: string[];
+  };
+  quality: {
+    level: "draft" | "community" | "verified" | "featured";
+    score: number;
+    installs: number;
+    testStatus: "untested" | "passing" | "failing" | "blocked";
+  };
+  provenance: {
+    source: string;
+    license: string;
+    sharePolicy: "original" | "clean_room_rewrite" | "vendor_provided" | "community_import";
+    notes?: string;
+  };
+};
+
 const root = process.cwd().includes("apps/api") ? join(process.cwd(), "../..") : process.cwd();
 
 export const devices: HardwareTarget[] = JSON.parse(
@@ -69,6 +97,10 @@ export const skillTests: SkillTestCase[] = JSON.parse(
 
 export const compatibilityMatrix: CompatibilityMatrixItem[] = JSON.parse(
   readFileSync(join(root, "datasets/compatibility/compatibility-matrix.json"), "utf-8")
+);
+
+export const skillsLabPackages: SkillsLabPackage[] = JSON.parse(
+  readFileSync(join(root, "datasets/skills-lab/packages.json"), "utf-8")
 );
 
 export const projects = new Map<string, Project>();
