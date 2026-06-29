@@ -1,4 +1,4 @@
-import type { AgentTemplate } from "@lingji/core";
+import type { AgentTemplate } from "@lumiforge/core";
 
 export function TemplateCard({ template }: { template: AgentTemplate }) {
   return (
