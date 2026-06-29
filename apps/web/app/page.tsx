@@ -18,6 +18,7 @@ export default function HomePage() {
         <div className="brand"><div className="logo" /> 灵机工坊 LumiForge</div>
         <div className="nav-links">
           <a href="/capabilities">Capability Catalog</a>
+          <a href="/skills">Skills Manager</a>
           <a href="/runtime">Runtime Blueprint</a>
           <a href="/debugger">Device Debugger</a>
           <a href="/studio">Agent Studio</a>
@@ -35,6 +36,7 @@ export default function HomePage() {
           <div className="actions">
             <a className="btn primary" href="/studio">进入 Agent Studio</a>
             <a className="btn" href="/capabilities">查看能力重构</a>
+            <a className="btn" href="/skills">打开 Skills Manager</a>
             <a className="btn" href="/runtime">查看 Runtime Blueprint</a>
             <a className="btn" href="/debugger">打开 Device Debugger</a>
           </div>
