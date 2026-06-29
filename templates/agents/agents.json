@@ -1,0 +1,113 @@
+[
+  {
+    "id": "ai-badge-companion",
+    "name": "AI 陪伴吧唧",
+    "tagline": "把屏幕开发板变成可聊天、会表情反馈的电子吧唧。",
+    "scenario": "ai_badge",
+    "description": "适合小红书 IP、粉丝周边、活动胸牌、陪伴类原型。",
+    "requiredCapabilities": ["display", "wifi", "button", "agent_runtime"],
+    "recommendedHardwareIds": ["esp32-s3-display-devkit", "m5stack-cores3"],
+    "defaultPersona": "你是一个可爱、温暖、会鼓励用户的随身智能伙伴。回答要简短、亲切、带一点俏皮感。",
+    "defaultWakeWord": "灵机灵机",
+    "maturity": "mvp",
+    "skills": [
+      {
+        "id": "daily_greeting",
+        "name": "每日问候",
+        "description": "根据时间主动问候用户。",
+        "trigger": "schedule",
+        "requires": ["display"],
+        "configSchema": {}
+      },
+      {
+        "id": "button_chat",
+        "name": "按键对话",
+        "description": "按下按钮后启动一轮对话。",
+        "trigger": "button",
+        "requires": ["button"],
+        "configSchema": {}
+      }
+    ]
+  },
+  {
+    "id": "desktop-pet",
+    "name": "AI 桌面宠物",
+    "tagline": "有表情、有记忆、会主动互动的桌面小伙伴。",
+    "scenario": "desktop_pet",
+    "description": "适合工位、直播间、礼品硬件、陪伴设备。",
+    "requiredCapabilities": ["display", "speaker", "microphone", "wifi", "agent_runtime"],
+    "recommendedHardwareIds": ["m5stack-cores3", "esp32-s3-display-devkit"],
+    "defaultPersona": "你是一只住在桌面设备里的电子宠物，温柔、活泼、爱观察用户状态。",
+    "defaultWakeWord": "小灵机",
+    "maturity": "mvp",
+    "skills": [
+      {
+        "id": "emotion_expression",
+        "name": "情绪表情",
+        "description": "根据对话情绪切换屏幕表情。",
+        "trigger": "voice",
+        "requires": ["display"],
+        "configSchema": {}
+      },
+      {
+        "id": "memory_note",
+        "name": "陪伴记忆",
+        "description": "把用户偏好写入记忆。",
+        "trigger": "voice",
+        "requires": [],
+        "configSchema": {}
+      }
+    ]
+  },
+  {
+    "id": "voice-assistant-kit",
+    "name": "AI 语音助手",
+    "tagline": "面向小智类硬件的一键语音助手模板。",
+    "scenario": "voice_assistant",
+    "description": "打通麦克风、扬声器、唤醒词、对话和工具调用。",
+    "requiredCapabilities": ["microphone", "speaker", "wifi", "agent_runtime"],
+    "recommendedHardwareIds": ["xiaozhi-esp32-voice-kit", "m5stack-cores3"],
+    "defaultPersona": "你是一个高效、清晰、可以帮助用户处理日常任务的语音助手。",
+    "defaultWakeWord": "你好灵机",
+    "maturity": "mvp",
+    "skills": [
+      {
+        "id": "voice_chat",
+        "name": "语音对话",
+        "description": "唤醒后进行实时语音对话。",
+        "trigger": "voice",
+        "requires": ["microphone", "speaker"],
+        "configSchema": {}
+      },
+      {
+        "id": "tool_calling",
+        "name": "工具调用",
+        "description": "通过 MCP 或云端 API 调用天气、日历、搜索等工具。",
+        "trigger": "voice",
+        "requires": ["wifi"],
+        "configSchema": {}
+      }
+    ]
+  },
+  {
+    "id": "vision-assistant",
+    "name": "AI 拍照识别助手",
+    "tagline": "按一下，拍照识别并用自然语言解释。",
+    "scenario": "vision_assistant",
+    "description": "适合学习、物品识别、视觉问答、低成本摄像头 Agent。",
+    "requiredCapabilities": ["camera", "wifi", "agent_runtime"],
+    "recommendedHardwareIds": ["seeed-xiao-esp32s3-sense", "m5stack-cores3"],
+    "defaultPersona": "你是一个善于观察图片细节的视觉助手，回答要准确、结构清楚。",
+    "maturity": "concept",
+    "skills": [
+      {
+        "id": "photo_qa",
+        "name": "拍照问答",
+        "description": "拍摄图片后调用视觉模型进行解释。",
+        "trigger": "vision",
+        "requires": ["camera"],
+        "configSchema": {}
+      }
+    ]
+  }
+]
