@@ -1,10 +1,10 @@
 {
-  "name": "lumi",
+  "name": "lumiforge",
   "private": true,
   "version": "0.1.0",
-  "description": "灵机工坊：一站式 AI 智能硬件开发平台",
+  "description": "灵机工坊 LumiForge：AI Native 一站式智能硬件开发平台",
   "scripts": {
-    "dev": "pnpm --parallel --filter @lingji/web --filter @lingji/api dev",
+    "dev": "pnpm --parallel --filter @lumiforge/web --filter @lumiforge/api dev",
     "build": "pnpm -r build",
     "lint": "pnpm -r lint",
     "typecheck": "pnpm -r typecheck",
