@@ -1,0 +1,77 @@
+[
+  {
+    "id": "daily-greeting-esp32s3-host-001",
+    "skillId": "daily_greeting",
+    "target": {
+      "runtimeProfile": "lumiforge-agent-c",
+      "hardwareClaw": "esp32-s3-display-devkit-lumiforge-agent-c",
+      "chip": "ESP32-S3"
+    },
+    "input": {
+      "eventType": "schedule",
+      "payload": "morning_greeting",
+      "context": { "hour": 9, "memoryMode": "local" }
+    },
+    "expected": {
+      "mustCallTools": ["get_current_time"],
+      "mustWriteMemory": false,
+      "maxLatencyMs": 500,
+      "expectedOutputContains": ["早", "你好"]
+    },
+    "quality": {
+      "priority": "p0",
+      "status": "draft",
+      "notes": "Host runtime test first; ESP-IDF timing later."
+    }
+  },
+  {
+    "id": "memory-capture-esp32s3-host-001",
+    "skillId": "memory_capture",
+    "target": {
+      "runtimeProfile": "lumiforge-agent-c",
+      "hardwareClaw": "esp32-s3-display-devkit-lumiforge-agent-c",
+      "chip": "ESP32-S3"
+    },
+    "input": {
+      "eventType": "voice",
+      "payload": "请记住我喜欢可爱的桌面机器人。",
+      "context": { "memoryMode": "local" }
+    },
+    "expected": {
+      "mustCallTools": ["memory_write"],
+      "mustWriteMemory": true,
+      "maxLatencyMs": 800,
+      "expectedOutputContains": ["记住", "桌面机器人"]
+    },
+    "quality": {
+      "priority": "p0",
+      "status": "draft",
+      "notes": "Requires memory write assertion."
+    }
+  },
+  {
+    "id": "mcp-bridge-esp32s3-host-001",
+    "skillId": "mcp_bridge",
+    "target": {
+      "runtimeProfile": "lumiforge-agent-c",
+      "hardwareClaw": "esp32-s3-display-devkit-lumiforge-agent-c",
+      "chip": "ESP32-S3"
+    },
+    "input": {
+      "eventType": "manual",
+      "payload": "列出设备可以暴露的 MCP 工具。",
+      "context": { "mcpServer": true }
+    },
+    "expected": {
+      "mustCallTools": ["heap_info"],
+      "mustWriteMemory": false,
+      "maxLatencyMs": 1000,
+      "expectedOutputContains": ["tool", "capability"]
+    },
+    "quality": {
+      "priority": "p1",
+      "status": "draft",
+      "notes": "MCP transport not implemented yet; this test anchors expected capability surface."
+    }
+  }
+]
