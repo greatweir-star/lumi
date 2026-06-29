@@ -29,6 +29,8 @@ GET /runtime/blueprint/:id
 GET /runtime/capabilities
 GET /runtime/filesystem
 GET /runtime/web-console-modules
+GET /runtime/state
+GET /runtime/deployment-unit
 ```
 
 默认 Runtime Profile 为 `esp-claw-compatible`，用于对齐 ESP-Claw 的 AI Native 能力面。
