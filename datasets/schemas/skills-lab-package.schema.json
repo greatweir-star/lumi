@@ -2,53 +2,74 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "LumiForge Skills Lab Package",
   "type": "object",
-  "required": ["id", "name", "kind", "description", "author", "entry", "assets", "compatibility", "quality", "provenance"],
+  "required": ["id", "name", "description", "author", "source", "license", "skill", "quality", "security", "distribution"],
   "properties": {
     "id": { "type": "string" },
     "name": { "type": "string" },
-    "kind": { "enum": ["skill", "lua_script", "bundle", "template"] },
     "description": { "type": "string" },
     "author": { "type": "string" },
-    "entry": { "type": "string" },
-    "tags": { "type": "array", "items": { "type": "string" } },
-    "assets": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["type", "path"],
-        "properties": {
-          "type": { "enum": ["SKILL.md", "lua", "resource", "manifest", "test"] },
-          "path": { "type": "string" },
-          "sha256": { "type": "string" }
-        }
+    "source": {
+      "type": "object",
+      "required": ["type", "url", "rewritePolicy"],
+      "properties": {
+        "type": { "enum": ["lumiforge_builtin", "community", "esp_claw_skills_lab", "vendor"] },
+        "url": { "type": "string" },
+        "upstreamId": { "type": "string" },
+        "rewritePolicy": { "enum": ["original", "clean_room_rewrite", "metadata_only", "vendor_provided"] }
       }
     },
-    "compatibility": {
+    "license": { "type": "string" },
+    "skill": {
       "type": "object",
+      "required": ["skillId", "entry", "files"],
       "properties": {
-        "runtimeProfiles": { "type": "array", "items": { "type": "string" } },
-        "hardwareClaws": { "type": "array", "items": { "type": "string" } },
-        "requiredCapabilities": { "type": "array", "items": { "type": "string" } }
+        "skillId": { "type": "string" },
+        "entry": { "const": "SKILL.md" },
+        "capGroups": { "type": "array", "items": { "type": "string" } },
+        "category": { "type": "array", "items": { "type": "string" } },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "peripherals": { "type": "array", "items": { "type": "string" } },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["path", "kind"],
+            "properties": {
+              "path": { "type": "string" },
+              "kind": { "enum": ["skill_md", "lua", "reference", "asset", "manifest"] },
+              "sha256": { "type": "string" }
+            }
+          }
+        }
       }
     },
     "quality": {
       "type": "object",
-      "required": ["level", "score", "installs", "testStatus"],
+      "required": ["status", "score"],
       "properties": {
-        "level": { "enum": ["draft", "community", "verified", "featured"] },
+        "status": { "enum": ["draft", "reviewing", "approved", "blocked", "deprecated"] },
         "score": { "type": "number", "minimum": 0, "maximum": 100 },
-        "installs": { "type": "number", "minimum": 0 },
-        "testStatus": { "enum": ["untested", "passing", "failing", "blocked"] }
+        "downloads": { "type": "number" },
+        "stars": { "type": "number" }
       }
     },
-    "provenance": {
+    "security": {
       "type": "object",
-      "required": ["source", "license", "sharePolicy"],
+      "required": ["reviewStatus", "riskLevel", "permissions"],
       "properties": {
-        "source": { "type": "string" },
-        "license": { "type": "string" },
-        "sharePolicy": { "enum": ["original", "clean_room_rewrite", "vendor_provided", "community_import"] },
-        "notes": { "type": "string" }
+        "reviewStatus": { "enum": ["unreviewed", "metadata_checked", "manual_reviewed", "sandbox_tested"] },
+        "riskLevel": { "enum": ["low", "medium", "high", "unknown"] },
+        "permissions": { "type": "array", "items": { "type": "string" } },
+        "warnings": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "distribution": {
+      "type": "object",
+      "required": ["installMode", "installPrompt"],
+      "properties": {
+        "installMode": { "enum": ["prompt_install", "download_bundle", "registry_sync"] },
+        "installPrompt": { "type": "string" },
+        "bundleUrl": { "type": "string" }
       }
     }
   }
