@@ -1,3 +1,4 @@
+import { AgentStudioWizard } from "../../components/agent-studio-wizard";
 import { agentTemplates, devices } from "../../lib/mock";
 
 export default function StudioPage() {
@@ -8,7 +9,11 @@ export default function StudioPage() {
     <main className="shell">
       <nav className="nav">
         <a className="brand" href="/"><div className="logo" /> 灵机工坊 LumiForge</a>
-        <div className="nav-links"><a href="/">返回首页</a></div>
+        <div className="nav-links">
+          <a href="/runtime">Runtime Blueprint</a>
+          <a href="/debugger">Device Debugger</a>
+          <a href="/">返回首页</a>
+        </div>
       </nav>
 
       <section className="hero">
@@ -24,19 +29,7 @@ export default function StudioPage() {
         </div>
       </section>
 
-      <section>
-        <div className="section-title"><div><h2>Runtime 配置矩阵</h2><p>MVP 要覆盖端侧 Agent 的完整能力面，而不是只做创建项目和模拟部署。</p></div></div>
-        <div className="panel">
-          <div className="pipeline">
-            <div className="pipeline-item"><strong>Agent Core</strong><span>上下文组装、工具调用、会话、LLM/Lua 决策策略。</span></div>
-            <div className="pipeline-item"><strong>Capability</strong><span>硬件能力、网络能力、IM、文件、搜索、HTTP、系统工具。</span></div>
-            <div className="pipeline-item"><strong>Event Router</strong><span>事件总线、规则匹配、自动化、传感器与触发器。</span></div>
-            <div className="pipeline-item"><strong>Memory</strong><span>本地结构化长期记忆、标签索引、用户画像、身份和灵魂文件。</span></div>
-            <div className="pipeline-item"><strong>Skills</strong><span>SKILL.md、脚本、资源、技能安装、权限和生命周期。</span></div>
-            <div className="pipeline-item"><strong>MCP</strong><span>设备既是 MCP Server，也能作为 MCP Client 调用外部服务。</span></div>
-          </div>
-        </div>
-      </section>
+      <AgentStudioWizard devices={devices} templates={agentTemplates} />
     </main>
   );
 }
