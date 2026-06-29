@@ -1,11 +1,11 @@
 import type { FastifyInstance } from "fastify";
-import { compileProjectToAgentConfig } from "@lingji/agent-runtime";
-import { DeployRequestSchema, ProjectSchema, scoreHardwareForTemplate } from "@lingji/core";
-import { defaultFirmwareAdapters } from "@lingji/firmware-adapters";
+import { compileProjectToAgentConfig } from "@lumiforge/agent-runtime";
+import { DeployRequestSchema, ProjectSchema, scoreHardwareForTemplate } from "@lumiforge/core";
+import { defaultFirmwareAdapters } from "@lumiforge/firmware-adapters";
 import { agentTemplates, devices, projects } from "./data";
 
 export async function registerRoutes(app: FastifyInstance) {
-  app.get("/health", async () => ({ ok: true, service: "lingji-api" }));
+  app.get("/health", async () => ({ ok: true, service: "lumiforge-api" }));
 
   app.get("/devices", async () => devices);
 
