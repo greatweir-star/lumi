@@ -1,0 +1,62 @@
+[
+  {
+    "id": "daily_greeting",
+    "name": "每日问候",
+    "entry": "SKILL.md",
+    "description": "根据时间、用户记忆和设备状态生成简短问候，可绑定屏幕表情和语音播报。",
+    "permissions": ["scheduler", "llm", "filesystem"],
+    "triggers": ["schedule", "manual"],
+    "requiresCapabilities": ["cap_scheduler", "cap_skill", "cap_files"],
+    "installSource": "builtin",
+    "trustLevel": "builtin",
+    "mvpStatus": "mock"
+  },
+  {
+    "id": "button_chat",
+    "name": "按键对话",
+    "entry": "SKILL.md",
+    "description": "按下设备按钮后启动一轮 Agent 对话，并将结果输出到屏幕或扬声器。",
+    "permissions": ["hardware", "llm"],
+    "triggers": ["button"],
+    "requiresCapabilities": ["cap_system", "cap_skill"],
+    "installSource": "builtin",
+    "trustLevel": "builtin",
+    "mvpStatus": "mock"
+  },
+  {
+    "id": "photo_qa",
+    "name": "拍照问答",
+    "entry": "SKILL.md",
+    "description": "通过摄像头拍照，调用视觉模型或外部 MCP 工具解释画面内容。",
+    "permissions": ["hardware", "network", "mcp", "llm"],
+    "triggers": ["vision", "button"],
+    "requiresCapabilities": ["cap_mcp", "cap_skill"],
+    "installSource": "builtin",
+    "trustLevel": "builtin",
+    "mvpStatus": "mock"
+  },
+  {
+    "id": "memory_capture",
+    "name": "记忆采集",
+    "entry": "SKILL.md",
+    "description": "把用户说出的偏好、重要事项和身份信息写入本地结构化记忆。",
+    "permissions": ["filesystem", "llm"],
+    "triggers": ["voice", "manual"],
+    "requiresCapabilities": ["cap_files", "cap_skill"],
+    "installSource": "builtin",
+    "trustLevel": "builtin",
+    "mvpStatus": "mock"
+  },
+  {
+    "id": "mcp_bridge",
+    "name": "MCP 桥接器",
+    "entry": "SKILL.md",
+    "description": "把设备能力暴露给外部 Agent，或让设备调用外部 MCP Server。",
+    "permissions": ["mcp", "network", "hardware"],
+    "triggers": ["manual", "system"],
+    "requiresCapabilities": ["cap_mcp"],
+    "installSource": "builtin",
+    "trustLevel": "builtin",
+    "mvpStatus": "mock"
+  }
+]
