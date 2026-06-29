@@ -1,0 +1,19 @@
+{
+  "name": "lumi",
+  "private": true,
+  "version": "0.1.0",
+  "description": "灵机工坊：一站式 AI 智能硬件开发平台",
+  "scripts": {
+    "dev": "pnpm --parallel --filter @lingji/web --filter @lingji/api dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "format": "prettier --write ."
+  },
+  "packageManager": "pnpm@9.12.0",
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2"
+  }
+}
