@@ -26,12 +26,13 @@ export default function SkillsLabPage() {
           <div className="actions">
             <a className="btn primary" href="/skills">打开本地 Skills Manager</a>
             <a className="btn" href="/datasets">查看 Claw Dataset</a>
+            <a className="btn" href="/runtime">查看 Runtime</a>
           </div>
         </div>
         <div className="panel deploy-card">
           <div className="step"><div className="step-num">{stats.packages}</div><div><h3>Lab Packages</h3><p>社区 Skill、Lua、Bundle 和模板包。</p></div></div>
-          <div className="step"><div className="step-num">{stats.luaScripts}</div><div><h3>Lua Scripts</h3><p>可动态加载到设备 Runtime 的本地脚本。</p></div></div>
-          <div className="step"><div className="step-num">{stats.verified}</div><div><h3>Verified</h3><p>通过测试和兼容矩阵后升级。</p></div></div>
+          <div className="step"><div className="step-num">{stats.luaScripts}</div><div><h3>Lua Files</h3><p>可动态加载到设备 Runtime 的本地脚本。</p></div></div>
+          <div className="step"><div className="step-num">{stats.unreviewed}</div><div><h3>Unreviewed</h3><p>未审查包默认只做 metadata-only，不直接安装。</p></div></div>
         </div>
       </section>
 
@@ -42,22 +43,23 @@ export default function SkillsLabPage() {
             <article className="card" key={item.id}>
               <h3>{item.name}</h3>
               <p>{item.description}</p>
-              <div className="tags"><span className="tag">{item.kind}</span><span className="tag">{item.quality.level}</span><span className="tag">score {item.quality.score}</span><span className="tag">{item.quality.testStatus}</span></div>
-              <div className="tags">{item.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div>
+              <div className="tags"><span className="tag">{item.source.type}</span><span className="tag">{item.quality.status}</span><span className="tag">score {item.quality.score}</span><span className="tag">risk {item.security.riskLevel}</span></div>
+              <div className="tags">{item.skill.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div>
+              <div className="tags">{item.security.permissions.slice(0, 4).map((permission) => <span className="tag" key={permission}>{permission}</span>)}</div>
             </article>
           ))}
         </div>
       </section>
 
       <section>
-        <div className="section-title"><div><h2>Share Workflow</h2><p>从社区分享进入数据资产，需要经过权限、许可证、测试和兼容性校验。</p></div></div>
+        <div className="section-title"><div><h2>Install Safety Gate</h2><p>第三方 Skill / Lua 必须先过来源、许可证、权限、风险和兼容性检查。</p></div></div>
         <div className="pipeline">
-          <div className="pipeline-item"><strong>Submit</strong><span>上传 SKILL.md、Lua、manifest、资源和测试。</span></div>
-          <div className="pipeline-item"><strong>Parse</strong><span>解析入口、权限、依赖能力和 Runtime Profile。</span></div>
-          <div className="pipeline-item"><strong>Review</strong><span>检查许可证、来源和 clean-room rewrite 边界。</span></div>
-          <div className="pipeline-item"><strong>Test</strong><span>运行 Skill Tests，记录工具调用、记忆写入和延迟。</span></div>
+          <div className="pipeline-item"><strong>Import</strong><span>从 ESP-Claw Skills Lab 或社区源导入 metadata，不直接执行代码。</span></div>
+          <div className="pipeline-item"><strong>Parse</strong><span>解析 SKILL.md frontmatter、cap groups、category、tags、peripherals。</span></div>
+          <div className="pipeline-item"><strong>Review</strong><span>检查许可证、来源、权限、风险和 clean-room rewrite 边界。</span></div>
+          <div className="pipeline-item"><strong>Sandbox</strong><span>在模拟器或测试设备上运行 Lua / Skill Tests。</span></div>
           <div className="pipeline-item"><strong>Matrix</strong><span>写入硬件 × Runtime × Skill 兼容矩阵。</span></div>
-          <div className="pipeline-item"><strong>Publish</strong><span>通过后进入 Skills Lab，持续积累安装量和评分。</span></div>
+          <div className="pipeline-item"><strong>Publish</strong><span>通过后进入 Skills Lab，可生成安装提示词或同步包。</span></div>
         </div>
       </section>
     </main>
