@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LumiForge Skills Lab Package",
+  "type": "object",
+  "required": ["id", "name", "kind", "description", "author", "entry", "assets", "compatibility", "quality", "provenance"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "kind": { "enum": ["skill", "lua_script", "bundle", "template"] },
+    "description": { "type": "string" },
+    "author": { "type": "string" },
+    "entry": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "path"],
+        "properties": {
+          "type": { "enum": ["SKILL.md", "lua", "resource", "manifest", "test"] },
+          "path": { "type": "string" },
+          "sha256": { "type": "string" }
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "properties": {
+        "runtimeProfiles": { "type": "array", "items": { "type": "string" } },
+        "hardwareClaws": { "type": "array", "items": { "type": "string" } },
+        "requiredCapabilities": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "required": ["level", "score", "installs", "testStatus"],
+      "properties": {
+        "level": { "enum": ["draft", "community", "verified", "featured"] },
+        "score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "installs": { "type": "number", "minimum": 0 },
+        "testStatus": { "enum": ["untested", "passing", "failing", "blocked"] }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source", "license", "sharePolicy"],
+      "properties": {
+        "source": { "type": "string" },
+        "license": { "type": "string" },
+        "sharePolicy": { "enum": ["original", "clean_room_rewrite", "vendor_provided", "community_import"] },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
