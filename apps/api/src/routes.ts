@@ -4,6 +4,7 @@ import { DeployRequestSchema, ProjectSchema, scoreHardwareForTemplate } from "@l
 import { defaultFirmwareAdapters } from "@lumiforge/firmware-adapters";
 import { agentTemplates, capabilityCatalog, clawPackages, devices, projects, runtimeBlueprints, skillCatalog } from "./data";
 import { registerDatasetRoutes } from "./dataset-routes";
+import { registerSkillsLabRoutes } from "./skills-lab-routes";
 import { mockRuntimeState } from "./runtime-state";
 
 function getDefaultRuntime() {
@@ -20,6 +21,7 @@ export async function registerRoutes(app: FastifyInstance) {
   });
 
   await registerDatasetRoutes(app);
+  await registerSkillsLabRoutes(app);
 
   app.get("/templates", async () => agentTemplates);
   app.get("/templates/:id", async (request, reply) => {
