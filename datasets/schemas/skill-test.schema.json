@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LumiForge Skill Test Case",
+  "type": "object",
+  "required": ["id", "skillId", "target", "input", "expected", "quality"],
+  "properties": {
+    "id": { "type": "string" },
+    "skillId": { "type": "string" },
+    "target": {
+      "type": "object",
+      "required": ["runtimeProfile", "hardwareClaw"],
+      "properties": {
+        "runtimeProfile": { "type": "string" },
+        "hardwareClaw": { "type": "string" },
+        "chip": { "type": "string" }
+      }
+    },
+    "input": {
+      "type": "object",
+      "required": ["eventType", "payload"],
+      "properties": {
+        "eventType": { "type": "string" },
+        "payload": { "type": "string" },
+        "context": { "type": "object" }
+      }
+    },
+    "expected": {
+      "type": "object",
+      "properties": {
+        "mustCallTools": { "type": "array", "items": { "type": "string" } },
+        "mustWriteMemory": { "type": "boolean" },
+        "maxLatencyMs": { "type": "number" },
+        "expectedOutputContains": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "required": ["priority", "status"],
+      "properties": {
+        "priority": { "enum": ["p0", "p1", "p2"] },
+        "status": { "enum": ["draft", "passing", "failing", "blocked"] },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
