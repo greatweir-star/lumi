@@ -2,7 +2,11 @@ import type { FastifyInstance } from "fastify";
 import { compileProjectToAgentConfig } from "@lumiforge/agent-runtime";
 import { DeployRequestSchema, ProjectSchema, scoreHardwareForTemplate } from "@lumiforge/core";
 import { defaultFirmwareAdapters } from "@lumiforge/firmware-adapters";
-import { agentTemplates, devices, projects } from "./data";
+import { agentTemplates, devices, projects, runtimeBlueprints } from "./data";
+
+function getDefaultRuntime() {
+  return runtimeBlueprints[0];
+}
 
 export async function registerRoutes(app: FastifyInstance) {
   app.get("/health", async () => ({ ok: true, service: "lumiforge-api" }));
@@ -24,6 +28,23 @@ export async function registerRoutes(app: FastifyInstance) {
     if (!template) return reply.code(404).send({ message: "Template not found" });
     return template;
   });
+
+  app.get("/runtime/blueprints", async () => runtimeBlueprints);
+
+  app.get("/runtime/blueprint", async () => getDefaultRuntime());
+
+  app.get("/runtime/blueprint/:id", async (request, reply) => {
+    const { id } = request.params as { id: string };
+    const blueprint = runtimeBlueprints.find((item) => item.id === id);
+    if (!blueprint) return reply.code(404).send({ message: "Runtime blueprint not found" });
+    return blueprint;
+  });
+
+  app.get("/runtime/capabilities", async () => getDefaultRuntime().capabilities);
+
+  app.get("/runtime/filesystem", async () => getDefaultRuntime().fileSystem);
+
+  app.get("/runtime/web-console-modules", async () => getDefaultRuntime().webConsole);
 
   app.get("/recommendations/:templateId", async (request, reply) => {
     const { templateId } = request.params as { templateId: string };
@@ -61,7 +82,10 @@ export async function registerRoutes(app: FastifyInstance) {
     const { id } = request.params as { id: string };
     const project = projects.get(id);
     if (!project) return reply.code(404).send({ message: "Project not found" });
-    return compileProjectToAgentConfig(project);
+    return {
+      agent: compileProjectToAgentConfig(project),
+      runtime: getDefaultRuntime()
+    };
   });
 
   app.post("/deployments", async (request, reply) => {
@@ -74,6 +98,6 @@ export async function registerRoutes(app: FastifyInstance) {
 
     const progress: unknown[] = [];
     const deployment = await adapter.flash(deployRequest, (item) => progress.push(item));
-    return reply.code(201).send({ deployment, progress });
+    return reply.code(201).send({ deployment, runtime: getDefaultRuntime(), progress });
   });
 }
