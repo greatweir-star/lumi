@@ -13,6 +13,19 @@ export type CapabilityCatalogItem = {
   mvpStatus: "designed" | "partial" | "implemented";
 };
 
+export type SkillCatalogItem = {
+  id: string;
+  name: string;
+  entry: "SKILL.md";
+  description: string;
+  permissions: string[];
+  triggers: string[];
+  requiresCapabilities: string[];
+  installSource: string;
+  trustLevel: string;
+  mvpStatus: string;
+};
+
 const root = process.cwd().includes("apps/api") ? join(process.cwd(), "../..") : process.cwd();
 
 export const devices: HardwareTarget[] = JSON.parse(
@@ -29,6 +42,10 @@ export const runtimeBlueprints: AiNativeRuntimeBlueprint[] = [
 
 export const capabilityCatalog: CapabilityCatalogItem[] = JSON.parse(
   readFileSync(join(root, "templates/runtime/capability-catalog.json"), "utf-8")
+);
+
+export const skillCatalog: SkillCatalogItem[] = JSON.parse(
+  readFileSync(join(root, "templates/skills/skills.json"), "utf-8")
 );
 
 export const projects = new Map<string, Project>();
