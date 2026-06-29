@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { AiNativeRuntimeBlueprint, SkillTestCase } from "@lumiforge/agent-runtime";
-import type { AgentTemplate, ClawPackage, HardwareTarget, Project } from "@lumiforge/core";
+import type { AgentTemplate, ClawPackage, HardwareTarget, Project, SkillsLabPackage } from "@lumiforge/core";
 
 export type CapabilityCatalogItem = {
   id: string;
@@ -35,34 +35,6 @@ export type CompatibilityMatrixItem = {
   coverage: Record<string, string>;
   metrics: Record<string, number | string | null>;
   notes: string;
-};
-
-export type SkillsLabPackage = {
-  id: string;
-  name: string;
-  kind: "skill" | "lua_script" | "bundle" | "template";
-  description: string;
-  author: string;
-  entry: string;
-  tags: string[];
-  assets: Array<{ type: string; path: string; sha256?: string }>;
-  compatibility: {
-    runtimeProfiles: string[];
-    hardwareClaws: string[];
-    requiredCapabilities: string[];
-  };
-  quality: {
-    level: "draft" | "community" | "verified" | "featured";
-    score: number;
-    installs: number;
-    testStatus: "untested" | "passing" | "failing" | "blocked";
-  };
-  provenance: {
-    source: string;
-    license: string;
-    sharePolicy: "original" | "clean_room_rewrite" | "vendor_provided" | "community_import";
-    notes?: string;
-  };
 };
 
 const root = process.cwd().includes("apps/api") ? join(process.cwd(), "../..") : process.cwd();
@@ -100,7 +72,7 @@ export const compatibilityMatrix: CompatibilityMatrixItem[] = JSON.parse(
 );
 
 export const skillsLabPackages: SkillsLabPackage[] = JSON.parse(
-  readFileSync(join(root, "datasets/skills-lab/packages.json"), "utf-8")
+  readFileSync(join(root, "datasets/skills-lab/skills-lab.json"), "utf-8")
 );
 
 export const projects = new Map<string, Project>();
