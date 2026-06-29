@@ -1,3 +1,5 @@
+export * from "./ai-native";
+
 import type { Project } from "@lumiforge/core";
 
 export type RuntimeEvent = {
@@ -42,11 +44,9 @@ export function compileProjectToAgentConfig(project: Project): CompiledAgentConf
 }
 
 export function routeRuntimeEvent(event: RuntimeEvent): RuntimeAction {
-  if (event.type === "button") {
-    return { type: "speak", payload: { text: "收到按键事件，我准备开始对话。" } };
-  }
-  if (event.type === "vision") {
-    return { type: "call_tool", payload: { tool: "vision.describe", input: event.payload } };
-  }
-  return { type: "noop", payload: {} };
+  return event.type === "vision"
+    ? { type: "call_tool", payload: { tool: "vision.describe", input: event.payload } }
+    : event.type === "button"
+      ? { type: "speak", payload: { text: "收到按键事件，我准备开始对话。" } }
+      : { type: "noop", payload: {} };
 }
