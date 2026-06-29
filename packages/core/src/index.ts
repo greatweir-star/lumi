@@ -1,5 +1,6 @@
 export * from "./naming";
 export * from "./dataset";
+export * from "./skills-lab";
 
 import { z } from "zod";
 
