@@ -1,0 +1,110 @@
+[
+  {
+    "id": "agent_core",
+    "name": "Agent Core",
+    "group": "runtime",
+    "description": "设备端 Agent Loop、会话、上下文组装、工具选择、LLM 调用和执行反馈。",
+    "espClawReference": "Agent Runtime / Agent Loop",
+    "lumiForgeModule": "agent_core",
+    "mvpStatus": "designed"
+  },
+  {
+    "id": "chat_as_creation",
+    "name": "Chat as Creation",
+    "group": "ai_native",
+    "description": "用户通过自然语言定义设备行为，平台生成可固化为本地规则、Lua 脚本或 Skill 的行为配置。",
+    "espClawReference": "Chat Coding",
+    "lumiForgeModule": "llm_lua_engine",
+    "mvpStatus": "designed"
+  },
+  {
+    "id": "event_driven_runtime",
+    "name": "Event Driven Runtime",
+    "group": "runtime",
+    "description": "按钮、传感器、IM、视觉、音频、定时和系统事件统一进入 Event Router。",
+    "espClawReference": "Event Driven",
+    "lumiForgeModule": "event_router",
+    "mvpStatus": "partial"
+  },
+  {
+    "id": "dynamic_lua_loading",
+    "name": "Dynamic Lua Loading",
+    "group": "scripting",
+    "description": "支持动态加载、启停、运行和调试 Lua 模块，用于本地确定性规则执行。",
+    "espClawReference": "IM chat + dynamic Lua loading",
+    "lumiForgeModule": "llm_lua_engine",
+    "mvpStatus": "designed"
+  },
+  {
+    "id": "structured_memory",
+    "name": "Structured Local Memory",
+    "group": "memory",
+    "description": "本地结构化长期记忆、JSONL 记录、索引、摘要、用户画像、身份和灵魂文件。",
+    "espClawReference": "Structured Memory",
+    "lumiForgeModule": "local_memory",
+    "mvpStatus": "partial"
+  },
+  {
+    "id": "mcp_server_client",
+    "name": "MCP Server / Client",
+    "group": "mcp",
+    "description": "设备既可作为 MCP Server 暴露硬件能力，也可作为 MCP Client 调用外部服务。",
+    "espClawReference": "MCP Communication",
+    "lumiForgeModule": "mcp_server,mcp_client",
+    "mvpStatus": "partial"
+  },
+  {
+    "id": "board_manager",
+    "name": "Board Manager",
+    "group": "hardware",
+    "description": "管理开发板、芯片、Flash/PSRAM、外设、Pin Map、烧录策略和适配状态。",
+    "espClawReference": "Ready Out of the Box / Board Manager",
+    "lumiForgeModule": "capability_runtime",
+    "mvpStatus": "partial"
+  },
+  {
+    "id": "browser_flash",
+    "name": "Browser Flashing",
+    "group": "provisioning",
+    "description": "浏览器内完成串口连接、固件写入、配网、设备身份和 Runtime Profile 灌装。",
+    "espClawReference": "one-click flashing",
+    "lumiForgeModule": "firmware_adapters",
+    "mvpStatus": "partial"
+  },
+  {
+    "id": "im_platform",
+    "name": "IM Platform",
+    "group": "integration",
+    "description": "Telegram、QQ、飞书、微信和自定义 Webhook 的消息收发、附件处理和触发 Agent Loop。",
+    "espClawReference": "IM support",
+    "lumiForgeModule": "im_platform",
+    "mvpStatus": "designed"
+  },
+  {
+    "id": "skills_manager",
+    "name": "Skills Manager",
+    "group": "skills",
+    "description": "以 SKILL.md 为入口的技能安装、启停、权限、资源、脚本和生命周期管理。",
+    "espClawReference": "Skills / Skills Lab",
+    "lumiForgeModule": "skills_manager",
+    "mvpStatus": "partial"
+  },
+  {
+    "id": "web_console",
+    "name": "Web Console",
+    "group": "debugger",
+    "description": "状态、聊天、设置、LLM、IM、搜索、记忆、Capabilities、Lua、文件、调度、规则、Skills 管理。",
+    "espClawReference": "Web Config / Web Console",
+    "lumiForgeModule": "web_console",
+    "mvpStatus": "partial"
+  },
+  {
+    "id": "component_extensibility",
+    "name": "Component Extensibility",
+    "group": "platform",
+    "description": "每个能力模块可裁剪，可通过组件集成外设、云服务、模型、通讯协议和 Runtime 扩展。",
+    "espClawReference": "Component Extensibility",
+    "lumiForgeModule": "capability_runtime",
+    "mvpStatus": "designed"
+  }
+]
