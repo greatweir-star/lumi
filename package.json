@@ -11,6 +11,7 @@
     "format": "prettier --write .",
     "claw:stats": "node tools/clawctl.mjs stats",
     "claw:validate": "node tools/clawctl.mjs validate",
+    "claw:test": "node tools/clawctl.mjs test",
     "claw:write-result": "node tools/clawctl.mjs write-result"
   },
   "packageManager": "pnpm@9.12.0",
