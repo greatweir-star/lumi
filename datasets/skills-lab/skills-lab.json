@@ -1,0 +1,124 @@
+[
+  {
+    "id": "lab_daily_greeting",
+    "name": "Daily Greeting",
+    "description": "Generate a morning or scheduled greeting using local time and optional memory context.",
+    "author": "LumiForge",
+    "source": {
+      "type": "lumiforge_builtin",
+      "url": "datasets/skills-lab",
+      "upstreamId": "daily_greeting",
+      "rewritePolicy": "original"
+    },
+    "license": "project-license-pending",
+    "skill": {
+      "skillId": "daily_greeting",
+      "entry": "SKILL.md",
+      "capGroups": ["cap_scheduler", "cap_skill", "cap_files"],
+      "category": ["utility"],
+      "tags": ["greeting", "schedule", "memory"],
+      "peripherals": ["speaker", "display"],
+      "files": [
+        { "path": "skills/daily_greeting/SKILL.md", "kind": "skill_md" },
+        { "path": "skills/daily_greeting/scripts/greeting.lua", "kind": "lua" }
+      ]
+    },
+    "quality": {
+      "status": "draft",
+      "score": 35,
+      "downloads": 0,
+      "stars": 0
+    },
+    "security": {
+      "reviewStatus": "metadata_checked",
+      "riskLevel": "low",
+      "permissions": ["scheduler", "filesystem:read", "llm"],
+      "warnings": []
+    },
+    "distribution": {
+      "installMode": "prompt_install",
+      "installPrompt": "Install the LumiForge Daily Greeting skill and enable the morning_greeting scheduler rule."
+    }
+  },
+  {
+    "id": "lab_button_chat",
+    "name": "Button Chat",
+    "description": "Start an Agent chat turn when a hardware button is pressed and output the response through display or speaker.",
+    "author": "LumiForge",
+    "source": {
+      "type": "lumiforge_builtin",
+      "url": "datasets/skills-lab",
+      "upstreamId": "button_chat",
+      "rewritePolicy": "original"
+    },
+    "license": "project-license-pending",
+    "skill": {
+      "skillId": "button_chat",
+      "entry": "SKILL.md",
+      "capGroups": ["cap_system", "cap_skill"],
+      "category": ["interaction"],
+      "tags": ["button", "chat", "agent-loop"],
+      "peripherals": ["button", "speaker", "display"],
+      "files": [
+        { "path": "skills/button_chat/SKILL.md", "kind": "skill_md" },
+        { "path": "skills/button_chat/scripts/button_chat.lua", "kind": "lua" }
+      ]
+    },
+    "quality": {
+      "status": "draft",
+      "score": 30,
+      "downloads": 0,
+      "stars": 0
+    },
+    "security": {
+      "reviewStatus": "metadata_checked",
+      "riskLevel": "low",
+      "permissions": ["hardware:button", "llm", "display:write", "audio:play"],
+      "warnings": []
+    },
+    "distribution": {
+      "installMode": "prompt_install",
+      "installPrompt": "Install the Button Chat skill and bind button.single_click to agent.chat.start."
+    }
+  },
+  {
+    "id": "esp_claw_skills_lab_metadata_bridge",
+    "name": "ESP-Claw Skills Lab Metadata Bridge",
+    "description": "Metadata-only bridge entry for importing ESP-Claw Skills Lab packages into LumiForge review workflow.",
+    "author": "LumiForge",
+    "source": {
+      "type": "esp_claw_skills_lab",
+      "url": "https://skills-lab.esp-claw.com",
+      "upstreamId": "external",
+      "rewritePolicy": "metadata_only"
+    },
+    "license": "MIT-compatible-required-before-distribution",
+    "skill": {
+      "skillId": "external_esp_claw_skill_placeholder",
+      "entry": "SKILL.md",
+      "capGroups": ["cap_lua"],
+      "category": ["external"],
+      "tags": ["esp-claw", "skills-lab", "metadata-import"],
+      "peripherals": [],
+      "files": [
+        { "path": "external/metadata-only/SKILL.md", "kind": "skill_md" }
+      ]
+    },
+    "quality": {
+      "status": "reviewing",
+      "score": 10,
+      "downloads": 0,
+      "stars": 0
+    },
+    "security": {
+      "reviewStatus": "unreviewed",
+      "riskLevel": "unknown",
+      "permissions": ["unknown"],
+      "warnings": ["Third-party Skill/Lua code must be reviewed before install or redistribution."]
+    },
+    "distribution": {
+      "installMode": "registry_sync",
+      "installPrompt": "Import metadata only, then run license, security and compatibility review before installing."
+    }
+  }
+]
