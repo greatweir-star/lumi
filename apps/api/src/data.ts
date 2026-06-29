@@ -3,6 +3,16 @@ import { join } from "node:path";
 import type { AiNativeRuntimeBlueprint } from "@lumiforge/agent-runtime";
 import type { AgentTemplate, HardwareTarget, Project } from "@lumiforge/core";
 
+export type CapabilityCatalogItem = {
+  id: string;
+  name: string;
+  group: string;
+  description: string;
+  espClawReference: string;
+  lumiForgeModule: string;
+  mvpStatus: "designed" | "partial" | "implemented";
+};
+
 const root = process.cwd().includes("apps/api") ? join(process.cwd(), "../..") : process.cwd();
 
 export const devices: HardwareTarget[] = JSON.parse(
@@ -16,5 +26,9 @@ export const agentTemplates: AgentTemplate[] = JSON.parse(
 export const runtimeBlueprints: AiNativeRuntimeBlueprint[] = [
   JSON.parse(readFileSync(join(root, "templates/runtime/esp-claw-compatible.json"), "utf-8"))
 ];
+
+export const capabilityCatalog: CapabilityCatalogItem[] = JSON.parse(
+  readFileSync(join(root, "templates/runtime/capability-catalog.json"), "utf-8")
+);
 
 export const projects = new Map<string, Project>();
