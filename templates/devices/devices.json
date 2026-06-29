@@ -8,7 +8,7 @@
     "psramMB": 8,
     "recommendedUseCases": ["AI 吧唧", "AI 桌宠", "语音助手", "情绪灯"],
     "capabilities": ["display", "touch", "microphone", "speaker", "wifi", "ble", "gpio", "i2c", "uart", "button", "led", "web_serial_flash", "ota", "agent_runtime"],
-    "firmwareProfiles": ["lingji-runtime-esp32s3", "esp-claw-compatible", "xiaozhi-compatible"],
+    "firmwareProfiles": ["lumiforge-runtime-esp32s3", "esp-claw-compatible", "xiaozhi-compatible"],
     "purchaseNotes": "优先选择 8MB PSRAM + 16MB Flash 版本，方便运行语音和屏幕 UI。",
     "maturity": "mvp"
   },
@@ -21,7 +21,7 @@
     "psramMB": 8,
     "recommendedUseCases": ["AI 桌宠", "语音助手", "工位助手"],
     "capabilities": ["display", "touch", "microphone", "speaker", "camera", "battery", "wifi", "ble", "i2c", "button", "web_serial_flash", "ota", "agent_runtime"],
-    "firmwareProfiles": ["lingji-runtime-m5stack", "esp-claw-compatible"],
+    "firmwareProfiles": ["lumiforge-runtime-m5stack", "esp-claw-compatible"],
     "purchaseNotes": "硬件完整度高，适合快速做桌面产品原型。",
     "maturity": "mvp"
   },
@@ -34,7 +34,7 @@
     "psramMB": 8,
     "recommendedUseCases": ["AI 语音助手", "陪伴终端", "故事机"],
     "capabilities": ["microphone", "speaker", "wifi", "button", "led", "web_serial_flash", "ota", "agent_runtime"],
-    "firmwareProfiles": ["xiaozhi-compatible", "lingji-runtime-voice"],
+    "firmwareProfiles": ["xiaozhi-compatible", "lumiforge-runtime-voice"],
     "purchaseNotes": "优先用于语音链路打通，屏幕和视觉能力可后续扩展。",
     "maturity": "mvp"
   },
@@ -47,7 +47,7 @@
     "psramMB": 8,
     "recommendedUseCases": ["AI 拍照识别助手", "低功耗视觉节点"],
     "capabilities": ["camera", "microphone", "wifi", "ble", "battery", "gpio", "i2c", "web_serial_flash", "ota", "agent_runtime"],
-    "firmwareProfiles": ["lingji-runtime-vision", "sensecraft-bridge"],
+    "firmwareProfiles": ["lumiforge-runtime-vision", "sensecraft-bridge"],
     "purchaseNotes": "适合视觉识别、拍照问答、轻量边缘 AI 场景。",
     "maturity": "experimental"
   }
