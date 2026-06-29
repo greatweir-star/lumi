@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { AiNativeRuntimeBlueprint } from "@lumiforge/agent-runtime";
-import type { AgentTemplate, HardwareTarget, Project } from "@lumiforge/core";
+import type { AgentTemplate, ClawPackage, HardwareTarget, Project } from "@lumiforge/core";
 
 export type CapabilityCatalogItem = {
   id: string;
@@ -46,6 +46,10 @@ export const capabilityCatalog: CapabilityCatalogItem[] = JSON.parse(
 
 export const skillCatalog: SkillCatalogItem[] = JSON.parse(
   readFileSync(join(root, "templates/skills/skills.json"), "utf-8")
+);
+
+export const clawPackages: ClawPackage[] = JSON.parse(
+  readFileSync(join(root, "datasets/claws/claws.json"), "utf-8")
 );
 
 export const projects = new Map<string, Project>();
