@@ -1,74 +1,118 @@
-# 《灵机工坊》开发路线图
+# 《灵机工坊 LumiForge》开发路线图
 
-## Milestone 0：项目骨架
+## Milestone 0：命名与架构校准
 
-状态：已完成首版。
+状态：已完成。
 
-- Monorepo 初始化
-- Next.js 前端原型
-- Fastify API 骨架
-- Core 领域模型
-- Agent Runtime 抽象
-- Firmware Adapter 抽象
-- 首批硬件模板
-- 首批 Agent 模板
+- 英文名统一为 LumiForge。
+- npm workspace scope 统一为 `@lumiforge/*`。
+- README / PRD / 前端文案升级为 AI Native Runtime 定位。
+- 新增 `AiNativeRuntimeBlueprint`、Capability、Memory、Skills、MCP、IM、Web Console、Runtime FS 类型抽象。
+- 新增 ESP-Claw 能力对齐清单。
 
-## Milestone 1：可演示 MVP
+## Milestone 1：AI Native Runtime Blueprint API
 
-目标：能完整演示“选硬件 → 选模板 → 配 Agent → 创建项目 → 模拟部署”。
+目标：让平台能返回完整 Runtime Blueprint，而不是只返回设备和模板。
 
 任务：
 
-- Agent Studio 多步骤表单
-- 前端调用 API 创建项目
-- 推荐硬件接口接入页面
-- 部署模拟进度条
-- Debugger 页面占位
+- 新增 `/runtime/blueprint` API。
+- 新增 `/runtime/capabilities` API。
+- 新增 `/runtime/filesystem` API。
+- 新增 `/runtime/web-console-modules` API。
+- 新增 Runtime Profile 模板数据。
+- Agent Studio 显示 Runtime 配置矩阵。
 
-## Milestone 2：真实设备连接
+验收：前端可以看到 Agent Core、Capability Runtime、Event Router、LLM+Lua、Memory、Skills、MCP、IM、Web Console、Runtime FS 的完整配置面。
 
-目标：能通过浏览器连接真实 ESP32-S3 设备。
+## Milestone 2：ESP-Claw Compatible Runtime Profile
 
-任务：
-
-- Web Serial 连接封装
-- 串口日志读取
-- 串口断开和错误处理
-- 浏览器兼容性提示
-- 设备身份识别
-
-## Milestone 3：真实烧录
-
-目标：能刷写 ESP32-S3 固件。
+目标：复刻 ESP-Claw 的能力面，形成 `esp-claw-compatible` Profile。
 
 任务：
 
-- 接入 esptool-js 或 ESP Web Tools 能力
-- 固件 manifest 管理
-- bootloader / partition / app offset 配置
-- 烧录进度和错误诊断
-- ESP-Claw / xiaozhi 兼容固件 Profile
+- Agent Core 配置结构。
+- Capability Registry。
+- Event Router Rules。
+- Local Memory 文件布局。
+- Skills 包结构。
+- MCP Server / Client 配置。
+- IM 平台配置。
+- Web Console 信息架构。
+- Runtime FS 初始化包。
 
-## Milestone 4：设备调试台
+验收：部署单元不再只是固件，而是 Firmware + Runtime FS + Agent Config + Skills + Router Rules + Memory Seed。
 
-目标：让用户知道设备为什么失败、哪里需要处理。
+## Milestone 3：Web Console / Device Debugger
 
-任务：
-
-- 串口日志面板
-- Wi-Fi 状态
-- 麦克风/扬声器/屏幕/按键自检
-- Agent 对话测试
-- 技能调用记录
-
-## Milestone 5：项目持久化与模板市场
-
-目标：支持真实用户项目保存和模板复用。
+目标：在平台侧实现 ESP-Claw Web 控制台能力的开发者版本。
 
 任务：
 
-- PostgreSQL 数据模型
-- 用户项目保存
-- 私有模板和公开模板
-- 固件版本管理
-- OTA 任务模型
+- 系统状态页。
+- 在线聊天页。
+- 基础设置页。
+- LLM 设置页。
+- IM 设置页。
+- 网络与搜索设置页。
+- 记忆管理页。
+- Capabilities 管理页。
+- Lua 模块管理页。
+- 文件管理页。
+- Scheduler / Router Rules / Skills 管理页。
+
+验收：即使还没连真机，也能通过模拟 runtime state 展示完整调试体验。
+
+## Milestone 4：真实设备连接
+
+目标：通过浏览器连接真实 ESP32-S3 设备。
+
+任务：
+
+- Web Serial 连接封装。
+- 串口日志读取。
+- 串口断开和错误处理。
+- 浏览器兼容性提示。
+- 设备身份识别。
+
+## Milestone 5：真实烧录与灌装
+
+目标：能刷写 ESP32-S3 固件，并灌装 Runtime Profile。
+
+任务：
+
+- 接入 esptool-js 或 ESP Web Tools 能力。
+- 固件 manifest 管理。
+- bootloader / partition / app offset 配置。
+- Runtime FS 初始化包写入。
+- Agent Config 写入。
+- Skills / Lua / Router Rules 写入。
+- 烧录进度和错误诊断。
+
+## Milestone 6：Skills / Lua / MCP 生态
+
+目标：LumiForge 从开发工具升级为智能硬件 Agent 生态平台。
+
+任务：
+
+- Skills Marketplace。
+- Lua 脚本管理。
+- Capability 权限模型。
+- MCP 工具目录。
+- Skill 安全审查和信任等级。
+- 模板发布、复制和版本管理。
+
+## Milestone 7：量产与设备运营
+
+目标：支持硬件团队使用 LumiForge 做小批量量产和设备运营。
+
+任务：
+
+- PostgreSQL 数据模型。
+- 用户项目保存。
+- 批量烧录。
+- OTA 任务模型。
+- 设备分组。
+- 远程日志。
+- 灰度发布。
+- 团队协作和权限。
