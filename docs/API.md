@@ -32,9 +32,14 @@ GET /skills/:id
 ```http
 GET /skills-lab/packages
 GET /skills-lab/packages/:id
+GET /skills-lab/stats
 GET /skills-lab/categories
 GET /skills-lab/share-template
+POST /skills-lab/packages
+POST /skills-lab/packages/:id/install-plan
 ```
+
+Skills Lab 是社区 Skill / Lua 市场。第三方包默认需要经过来源、许可证、权限、风险和兼容性检查后才能安装。
 
 ## Claw Dataset
 
