@@ -7,7 +7,7 @@ lf_status_t lf_stdio_llm_echo(const char *prompt, lf_text_t *out_text, void *use
   (void)user_data;
   if (!prompt || !out_text) return LF_ERR_INVALID_ARG;
   (void)snprintf(out_text->data, sizeof(out_text->data), "[mock-llm] 已处理输入，prompt 长度=%lu", (unsigned long)strlen(prompt));
-  out_text->len = strnlen(out_text->data, sizeof(out_text->data));
+  out_text->len = strlen(out_text->data);
   return LF_OK;
 }
 
@@ -43,7 +43,7 @@ static lf_status_t lf_tool_heap_info(struct lf_agent_context *agent, const char 
   (void)agent;
   (void)input;
   (void)snprintf(output->data, sizeof(output->data), "heap_info: host demo does not expose heap metrics");
-  output->len = strnlen(output->data, sizeof(output->data));
+  output->len = strlen(output->data);
   return LF_OK;
 }
 
@@ -54,7 +54,7 @@ static lf_status_t lf_tool_memory_write(struct lf_agent_context *agent, const ch
     status = lf_memory_append_line(&agent->memory, agent->memory.memory_path, input);
   }
   (void)snprintf(output->data, sizeof(output->data), "memory_write: %s", status == LF_OK ? "ok" : "failed");
-  output->len = strnlen(output->data, sizeof(output->data));
+  output->len = strlen(output->data);
   return status;
 }
 
@@ -63,7 +63,7 @@ static lf_status_t lf_tool_time(struct lf_agent_context *agent, const char *inpu
   (void)input;
   time_t now = time(0);
   (void)snprintf(output->data, sizeof(output->data), "unix_time=%ld", (long)now);
-  output->len = strnlen(output->data, sizeof(output->data));
+  output->len = strlen(output->data);
   return LF_OK;
 }
 
