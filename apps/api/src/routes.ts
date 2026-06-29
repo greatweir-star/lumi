@@ -3,6 +3,7 @@ import { compileProjectToAgentConfig } from "@lumiforge/agent-runtime";
 import { DeployRequestSchema, ProjectSchema, scoreHardwareForTemplate } from "@lumiforge/core";
 import { defaultFirmwareAdapters } from "@lumiforge/firmware-adapters";
 import { agentTemplates, devices, projects, runtimeBlueprints } from "./data";
+import { mockRuntimeState } from "./runtime-state";
 
 function getDefaultRuntime() {
   return runtimeBlueprints[0];
@@ -45,6 +46,19 @@ export async function registerRoutes(app: FastifyInstance) {
   app.get("/runtime/filesystem", async () => getDefaultRuntime().fileSystem);
 
   app.get("/runtime/web-console-modules", async () => getDefaultRuntime().webConsole);
+
+  app.get("/runtime/state", async () => mockRuntimeState);
+
+  app.get("/runtime/deployment-unit", async () => ({
+    firmwareManifest: null,
+    runtimeProfile: getDefaultRuntime(),
+    runtimeFsSeed: getDefaultRuntime().fileSystem,
+    agentConfig: null,
+    skills: [],
+    routerRules: mockRuntimeState.eventRouter,
+    memorySeed: getDefaultRuntime().memory,
+    deviceIdentity: mockRuntimeState.device
+  }));
 
   app.get("/recommendations/:templateId", async (request, reply) => {
     const { templateId } = request.params as { templateId: string };
