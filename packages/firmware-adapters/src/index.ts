@@ -1,4 +1,4 @@
-import type { DeployRequest, Deployment, HardwareTarget } from "@lingji/core";
+import type { DeployRequest, Deployment, HardwareTarget } from "@lumiforge/core";
 
 export type FlashProgress = {
   stage: "connect" | "erase" | "write" | "verify" | "configure" | "done" | "error";
@@ -11,7 +11,7 @@ export type FirmwareManifest = {
   name: string;
   version: string;
   targetChip: string;
-  runtime: "esp-claw" | "xiaozhi" | "lingji-runtime" | "custom";
+  runtime: "esp-claw" | "xiaozhi" | "lumiforge-runtime" | "custom";
   artifacts: Array<{
     name: string;
     offset: string;
@@ -42,7 +42,7 @@ export class WebSerialEspAdapter implements FirmwareAdapter {
       name: profile,
       version: "0.1.0",
       targetChip: target.chip,
-      runtime: profile.includes("xiaozhi") ? "xiaozhi" : profile.includes("esp-claw") ? "esp-claw" : "lingji-runtime",
+      runtime: profile.includes("xiaozhi") ? "xiaozhi" : profile.includes("esp-claw") ? "esp-claw" : "lumiforge-runtime",
       artifacts: []
     }));
   }
