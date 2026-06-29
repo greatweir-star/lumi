@@ -84,4 +84,3 @@ POST /deployments
 - router rules
 - memory seed
 - device identity
-```
