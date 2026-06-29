@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LumiForge Claw Package",
+  "type": "object",
+  "required": ["id", "name", "kind", "target", "quality", "provenance", "artifacts"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "kind": { "enum": ["hardware", "runtime", "skill", "compatibility", "evaluation"] },
+    "target": {
+      "type": "object",
+      "required": ["chip", "board"],
+      "properties": {
+        "chip": { "type": "string" },
+        "board": { "type": "string" },
+        "vendor": { "type": "string" }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "required": ["level", "score", "tested"],
+      "properties": {
+        "level": { "enum": ["draft", "bench_tested", "field_tested", "production_ready"] },
+        "score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "tested": { "type": "boolean" },
+        "notes": { "type": "string" }
+      }
+    },
+    "capabilities": { "type": "array", "items": { "type": "string" } },
+    "runtimeProfiles": { "type": "array", "items": { "type": "string" } },
+    "skills": { "type": "array", "items": { "type": "string" } },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "path"],
+        "properties": {
+          "type": { "type": "string" },
+          "path": { "type": "string" },
+          "sha256": { "type": "string" }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source", "license", "rewritePolicy"],
+      "properties": {
+        "source": { "type": "string" },
+        "license": { "type": "string" },
+        "rewritePolicy": { "enum": ["clean_room_rewrite", "original", "vendor_provided", "unknown"] },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
