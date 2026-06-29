@@ -1,4 +1,5 @@
 export * from "./ai-native";
+export * from "./deployment-unit";
 
 import type { Project } from "@lumiforge/core";
 
