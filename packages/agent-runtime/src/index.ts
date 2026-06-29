@@ -1,4 +1,4 @@
-import type { Project } from "@lingji/core";
+import type { Project } from "@lumiforge/core";
 
 export type RuntimeEvent = {
   type: "voice" | "button" | "sensor" | "vision" | "schedule" | "system";
@@ -35,7 +35,7 @@ export function compileProjectToAgentConfig(project: Project): CompiledAgentConf
     rules: [
       {
         when: "button.single_click",
-        then: { type: "speak", payload: { text: "你好，我是灵机工坊生成的智能体。" } }
+        then: { type: "speak", payload: { text: "你好，我是 LumiForge 生成的智能体。" } }
       }
     ]
   };
