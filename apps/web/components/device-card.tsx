@@ -1,4 +1,4 @@
-import type { HardwareTarget } from "@lingji/core";
+import type { HardwareTarget } from "@lumiforge/core";
 
 export function DeviceCard({ device }: { device: HardwareTarget }) {
   return (
