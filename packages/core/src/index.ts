@@ -1,3 +1,5 @@
+export * from "./naming";
+
 import { z } from "zod";
 
 export const DeviceCapabilitySchema = z.enum([
