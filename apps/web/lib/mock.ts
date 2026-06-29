@@ -1,4 +1,4 @@
-import type { AgentTemplate, HardwareTarget } from "@lingji/core";
+import type { AgentTemplate, HardwareTarget } from "@lumiforge/core";
 import devicesJson from "../../../templates/devices/devices.json";
 import agentsJson from "../../../templates/agents/agents.json";
 
