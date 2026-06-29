@@ -2,7 +2,7 @@ import type { FastifyInstance } from "fastify";
 import { compileProjectToAgentConfig } from "@lumiforge/agent-runtime";
 import { DeployRequestSchema, ProjectSchema, scoreHardwareForTemplate } from "@lumiforge/core";
 import { defaultFirmwareAdapters } from "@lumiforge/firmware-adapters";
-import { agentTemplates, devices, projects, runtimeBlueprints } from "./data";
+import { agentTemplates, capabilityCatalog, devices, projects, runtimeBlueprints } from "./data";
 import { mockRuntimeState } from "./runtime-state";
 
 function getDefaultRuntime() {
@@ -40,6 +40,8 @@ export async function registerRoutes(app: FastifyInstance) {
     if (!blueprint) return reply.code(404).send({ message: "Runtime blueprint not found" });
     return blueprint;
   });
+
+  app.get("/runtime/capability-catalog", async () => capabilityCatalog);
 
   app.get("/runtime/capabilities", async () => getDefaultRuntime().capabilities);
 
