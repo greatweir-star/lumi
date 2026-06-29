@@ -1,0 +1,94 @@
+[
+  {
+    "id": "lab.daily-greeting",
+    "name": "每日问候 Skill",
+    "kind": "skill",
+    "description": "根据时间、记忆和设备状态生成问候，可输出到屏幕、语音或 IM。",
+    "author": "LumiForge Core",
+    "entry": "SKILL.md",
+    "tags": ["schedule", "memory", "display", "voice"],
+    "assets": [
+      { "type": "SKILL.md", "path": "skills/daily_greeting/SKILL.md" },
+      { "type": "lua", "path": "skills/daily_greeting/scripts/greeting.lua" },
+      { "type": "test", "path": "datasets/skill-tests/skill-tests.json#daily-greeting-esp32s3-host-001" }
+    ],
+    "compatibility": {
+      "runtimeProfiles": ["lumiforge-agent-c", "esp-claw-compatible"],
+      "hardwareClaws": ["esp32-s3-display-devkit-lumiforge-agent-c"],
+      "requiredCapabilities": ["cap_scheduler", "cap_files", "cap_skill"]
+    },
+    "quality": {
+      "level": "community",
+      "score": 45,
+      "installs": 0,
+      "testStatus": "untested"
+    },
+    "provenance": {
+      "source": "LumiForge builtin clean-room package",
+      "license": "project-license-pending",
+      "sharePolicy": "original",
+      "notes": "Designed to be compatible with ESP-Claw style Skills Lab metadata."
+    }
+  },
+  {
+    "id": "lab.button-chat-lua",
+    "name": "按键对话 Lua 脚本",
+    "kind": "lua_script",
+    "description": "监听单击按钮事件，触发一轮 Agent 对话，并把结果发送到默认输出通道。",
+    "author": "LumiForge Core",
+    "entry": "button_chat.lua",
+    "tags": ["button", "lua", "agent-loop"],
+    "assets": [
+      { "type": "lua", "path": "skills/button_chat/scripts/button_chat.lua" },
+      { "type": "manifest", "path": "skills/button_chat/manifest.json" }
+    ],
+    "compatibility": {
+      "runtimeProfiles": ["lumiforge-agent-c", "esp-claw-compatible"],
+      "hardwareClaws": ["esp32-s3-display-devkit-lumiforge-agent-c", "xiaozhi-esp32-voice-kit-lumiforge-agent-c"],
+      "requiredCapabilities": ["cap_skill", "cap_lua", "button"]
+    },
+    "quality": {
+      "level": "draft",
+      "score": 30,
+      "installs": 0,
+      "testStatus": "untested"
+    },
+    "provenance": {
+      "source": "LumiForge clean-room Lua sample",
+      "license": "project-license-pending",
+      "sharePolicy": "original",
+      "notes": "No upstream Lua copied."
+    }
+  },
+  {
+    "id": "lab.memory-capture-bundle",
+    "name": "记忆采集 Bundle",
+    "kind": "bundle",
+    "description": "包含 SKILL.md、Lua 脚本和测试用例，用于把用户偏好写入本地结构化记忆。",
+    "author": "LumiForge Core",
+    "entry": "SKILL.md",
+    "tags": ["memory", "local-first", "skill-bundle"],
+    "assets": [
+      { "type": "SKILL.md", "path": "skills/memory_capture/SKILL.md" },
+      { "type": "lua", "path": "skills/memory_capture/scripts/capture.lua" },
+      { "type": "test", "path": "datasets/skill-tests/skill-tests.json#memory-capture-esp32s3-host-001" }
+    ],
+    "compatibility": {
+      "runtimeProfiles": ["lumiforge-agent-c"],
+      "hardwareClaws": ["esp32-s3-display-devkit-lumiforge-agent-c", "xiaozhi-esp32-voice-kit-lumiforge-agent-c"],
+      "requiredCapabilities": ["cap_files", "cap_skill", "local_memory"]
+    },
+    "quality": {
+      "level": "community",
+      "score": 40,
+      "installs": 0,
+      "testStatus": "untested"
+    },
+    "provenance": {
+      "source": "LumiForge builtin clean-room package",
+      "license": "project-license-pending",
+      "sharePolicy": "original",
+      "notes": "Tracks local-memory behavior in Claw dataset."
+    }
+  }
+]
