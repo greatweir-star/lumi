@@ -1,0 +1,175 @@
+{
+  "id": "esp-claw-compatible",
+  "name": "LumiForge Runtime",
+  "target": "mcu",
+  "modules": [
+    "agent_core",
+    "capability_runtime",
+    "event_router",
+    "llm_lua_engine",
+    "local_memory",
+    "skills_manager",
+    "mcp_server",
+    "mcp_client",
+    "im_platform",
+    "web_console",
+    "runtime_fs",
+    "scheduler",
+    "file_manager"
+  ],
+  "fileSystem": {
+    "root": "/fatfs",
+    "sessionsDir": "/fatfs/sessions",
+    "memoryDir": "/fatfs/memory",
+    "skillsDir": "/fatfs/skills",
+    "scriptsDir": "/fatfs/scripts",
+    "routerRulesDir": "/fatfs/router_rules",
+    "schedulerDir": "/fatfs/scheduler",
+    "staticDir": "/fatfs/static",
+    "inboxDir": "/fatfs/inbox"
+  },
+  "memory": {
+    "enabled": true,
+    "recordsFile": "/fatfs/memory/memory_records.jsonl",
+    "indexFile": "/fatfs/memory/memory_index.json",
+    "digestFile": "/fatfs/memory/memory_digest.log",
+    "humanReadableFile": "/fatfs/memory/MEMORY.md",
+    "personaFiles": {
+      "user": "/fatfs/memory/user.md",
+      "soul": "/fatfs/memory/soul.md",
+      "identity": "/fatfs/memory/identity.md"
+    },
+    "retrieval": {
+      "mode": "hybrid",
+      "maxRecords": 12
+    }
+  },
+  "mcp": {
+    "server": {
+      "enabled": true,
+      "exposeCapabilities": ["display", "camera", "audio", "button", "gpio", "file", "memory", "skill", "system"]
+    },
+    "client": {
+      "enabled": true,
+      "allowedServers": []
+    }
+  },
+  "im": [
+    { "platform": "local", "enabled": true, "receiveAttachments": false },
+    { "platform": "wechat", "enabled": false, "receiveAttachments": true },
+    { "platform": "qq", "enabled": false, "receiveAttachments": true },
+    { "platform": "feishu", "enabled": false, "receiveAttachments": true },
+    { "platform": "telegram", "enabled": false, "receiveAttachments": true }
+  ],
+  "webConsole": [
+    "status",
+    "chat",
+    "settings_basic",
+    "settings_llm",
+    "settings_im",
+    "settings_network_search",
+    "memory",
+    "capabilities",
+    "lua_modules",
+    "files",
+    "scheduler",
+    "router_rules",
+    "skills"
+  ],
+  "capabilities": [
+    {
+      "id": "cap_system",
+      "name": "System",
+      "category": "system",
+      "description": "系统信息、时间、内存、网络状态和设备重启。",
+      "tools": [
+        { "name": "system.info", "description": "读取设备系统信息。", "inputSchema": {}, "visibleToLLM": true },
+        { "name": "system.reboot", "description": "重启设备。", "inputSchema": {}, "visibleToLLM": false }
+      ],
+      "enabledByDefault": true,
+      "requires": []
+    },
+    {
+      "id": "cap_files",
+      "name": "Files",
+      "category": "storage",
+      "description": "读写运行时文件系统中的配置、脚本、技能和资源。",
+      "tools": [
+        { "name": "files.read", "description": "读取文件。", "inputSchema": { "path": "string" }, "visibleToLLM": true },
+        { "name": "files.write", "description": "写入文件。", "inputSchema": { "path": "string", "content": "string" }, "visibleToLLM": false }
+      ],
+      "enabledByDefault": true,
+      "requires": []
+    },
+    {
+      "id": "cap_scheduler",
+      "name": "Scheduler",
+      "category": "system",
+      "description": "定时任务和运行时调度。",
+      "tools": [
+        { "name": "scheduler.create", "description": "创建定时任务。", "inputSchema": {}, "visibleToLLM": true },
+        { "name": "scheduler.list", "description": "列出定时任务。", "inputSchema": {}, "visibleToLLM": true }
+      ],
+      "enabledByDefault": true,
+      "requires": []
+    },
+    {
+      "id": "cap_mcp",
+      "name": "MCP Server / Client",
+      "category": "mcp",
+      "description": "设备作为 MCP Server 暴露能力，也作为 MCP Client 调用外部服务。",
+      "tools": [
+        { "name": "mcp.server.list_tools", "description": "列出设备暴露的 MCP 工具。", "inputSchema": {}, "visibleToLLM": true },
+        { "name": "mcp.client.call", "description": "调用外部 MCP 服务。", "inputSchema": {}, "visibleToLLM": true }
+      ],
+      "enabledByDefault": true,
+      "requires": ["wifi"]
+    },
+    {
+      "id": "cap_lua",
+      "name": "Lua Runtime",
+      "category": "lua",
+      "description": "执行本地 Lua 脚本和管理 Lua 模块。",
+      "tools": [
+        { "name": "lua.eval", "description": "执行受限 Lua 代码。", "inputSchema": { "code": "string" }, "visibleToLLM": false },
+        { "name": "lua.run_script", "description": "运行设备内脚本。", "inputSchema": { "path": "string" }, "visibleToLLM": true }
+      ],
+      "enabledByDefault": true,
+      "requires": []
+    },
+    {
+      "id": "cap_skill",
+      "name": "Skills Manager",
+      "category": "skill",
+      "description": "安装、启用、禁用和管理 Skill。",
+      "tools": [
+        { "name": "skill.install", "description": "安装 Skill。", "inputSchema": {}, "visibleToLLM": true },
+        { "name": "skill.list", "description": "列出 Skills。", "inputSchema": {}, "visibleToLLM": true }
+      ],
+      "enabledByDefault": true,
+      "requires": []
+    },
+    {
+      "id": "cap_im_platform",
+      "name": "IM Platform",
+      "category": "im",
+      "description": "Local Chat、微信、QQ、飞书、Telegram 等即时通讯接入。",
+      "tools": [
+        { "name": "im.send", "description": "发送 IM 消息。", "inputSchema": {}, "visibleToLLM": true }
+      ],
+      "enabledByDefault": true,
+      "requires": ["wifi"]
+    },
+    {
+      "id": "cap_web_search",
+      "name": "Web Search",
+      "category": "network",
+      "description": "调用搜索 API 检索在线资源。",
+      "tools": [
+        { "name": "web.search", "description": "搜索网络内容。", "inputSchema": { "query": "string" }, "visibleToLLM": true }
+      ],
+      "enabledByDefault": false,
+      "requires": ["wifi"]
+    }
+  ]
+}
