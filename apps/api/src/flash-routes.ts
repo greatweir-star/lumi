@@ -10,13 +10,32 @@ const espWebToolsManifest = JSON.parse(
   readFileSync(join(root, "templates/firmware/esp32s3/esp-web-tools.preview.json"), "utf-8")
 );
 
+type FirmwareArtifact = {
+  name: string;
+  offset: string;
+  path: string;
+  buildOutput?: string;
+  url: string;
+  required: boolean;
+  available: boolean;
+  notes: string;
+};
+
+function requiredArtifacts() {
+  return firmwareManifest.artifacts.filter((artifact: FirmwareArtifact) => artifact.required) as FirmwareArtifact[];
+}
+
+function missingRequiredArtifacts() {
+  return requiredArtifacts().filter((artifact) => !artifact.available);
+}
+
 function readiness() {
-  const requiredArtifacts = firmwareManifest.artifacts.filter((artifact: { required: boolean }) => artifact.required);
-  const missingRequiredArtifacts = requiredArtifacts.filter((artifact: { available: boolean }) => !artifact.available);
+  const missing = missingRequiredArtifacts();
   return {
-    status: missingRequiredArtifacts.length === 0 ? "ready_to_flash" : "missing_binaries",
-    requiredArtifacts: requiredArtifacts.length,
-    missingRequiredArtifacts: missingRequiredArtifacts.length,
+    status: missing.length === 0 ? "ready_to_flash" : "missing_binaries",
+    requiredArtifacts: requiredArtifacts().length,
+    missingRequiredArtifacts: missing.length,
+    missingArtifacts: missing.map((artifact) => ({ name: artifact.name, offset: artifact.offset, buildOutput: artifact.buildOutput, targetPath: artifact.path })),
     blockers: firmwareManifest.blockers,
     nextActions: [
       "Build ESP-IDF bootloader, partition table and app binary.",
@@ -24,6 +43,32 @@ function readiness() {
       "Serve binaries from the same origin as ESP Web Tools manifest.",
       "Run browser serial chip detection before enabling flash."
     ]
+  };
+}
+
+function buildPlan() {
+  return {
+    id: firmwareManifest.id,
+    buildProject: firmwareManifest.buildProject,
+    partitionTable: firmwareManifest.partitionTable,
+    targetChip: firmwareManifest.targetChip,
+    status: readiness().status,
+    commands: [
+      "cd firmware/lumiforge-agent-c/examples/esp_idf_agent_demo",
+      "idf.py set-target esp32s3",
+      "idf.py build"
+    ],
+    artifacts: firmwareManifest.artifacts.map((artifact: FirmwareArtifact) => ({
+      name: artifact.name,
+      required: artifact.required,
+      available: artifact.available,
+      offset: artifact.offset,
+      buildOutput: artifact.buildOutput,
+      targetPath: artifact.path,
+      serveUrl: artifact.url,
+      notes: artifact.notes
+    })),
+    readiness: readiness()
   };
 }
 
@@ -56,5 +101,10 @@ export async function registerFlashRoutes(app: FastifyInstance) {
   app.get("/flash/readiness/:id", async (request, reply) => {
     const { id } = request.params as { id: string };
     return id === firmwareManifest.id ? readiness() : reply.code(404).send({ message: "Firmware manifest not found" });
+  });
+
+  app.get("/flash/build-plan/:id", async (request, reply) => {
+    const { id } = request.params as { id: string };
+    return id === firmwareManifest.id ? buildPlan() : reply.code(404).send({ message: "Firmware manifest not found" });
   });
 }
