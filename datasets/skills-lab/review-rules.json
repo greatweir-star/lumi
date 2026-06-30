@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "id": "network_http",
+      "severity": "medium",
+      "match": ["cap_http_request", "http", "server", "endpoint", "url"],
+      "message": "Uses network or HTTP behavior. Review outbound/inbound endpoints and credential handling."
+    },
+    {
+      "id": "hardware_motion",
+      "severity": "high",
+      "match": ["servo", "pwm", "mcpwm", "motor", "gpio"],
+      "message": "Controls physical movement or hardware pins. Test only on a bench with safe limits."
+    },
+    {
+      "id": "installer_behavior",
+      "severity": "medium",
+      "match": ["install", "installer", "boot", "auto-start", "schedule", "cron"],
+      "message": "Installer or auto-start behavior detected. Review persistence, boot rules and rollback."
+    },
+    {
+      "id": "memory_write",
+      "severity": "medium",
+      "match": ["memory", "snapshot", "write", "credentials", "token"],
+      "message": "May write or expose memory, tokens or telemetry. Review data retention and redaction."
+    },
+    {
+      "id": "display_only",
+      "severity": "low",
+      "match": ["display", "dashboard", "lcd", "lvgl"],
+      "message": "Display-oriented skill. Still review remote data sources and rendering loop stability."
+    }
+  ]
+}
