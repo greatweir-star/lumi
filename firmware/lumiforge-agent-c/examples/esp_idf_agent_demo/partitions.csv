@@ -1,0 +1,7 @@
+# Name,   Type, SubType, Offset,   Size,     Flags
+nvs,      data, nvs,     0x9000,   0x5000,
+otadata,  data, ota,     0xe000,   0x2000,
+phy_init, data, phy,     0x10000,  0x1000,
+factory,  app,  factory, 0x20000,  0x1F0000,
+runtimefs,data, fat,     0x210000, 0x5C0000,
+storage,  data, fat,     0x7D0000, 0x830000,
