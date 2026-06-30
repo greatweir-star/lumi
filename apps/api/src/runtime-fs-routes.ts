@@ -5,7 +5,15 @@ import { mockRuntimeState } from "./runtime-state";
 
 function createPreviewDeploymentUnit() {
   const runtimeProfile = runtimeBlueprints[0];
-  return createRuntimeDeploymentUnit({
+  const skills = skillCatalog.map((skill) => ({
+    id: skill.id,
+    name: skill.name,
+    entry: "SKILL.md" as const,
+    permissions: skill.permissions.filter((permission) => ["filesystem", "network", "hardware", "mcp", "llm", "scheduler"].includes(permission)) as Array<"filesystem" | "network" | "hardware" | "mcp" | "llm" | "scheduler">,
+    installSource: skill.installSource === "builtin" ? "local" as const : "skills_lab" as const,
+    trustLevel: skill.trustLevel === "builtin" ? "builtin" as const : "community" as const
+  }));
+  const deployment = createRuntimeDeploymentUnit({
     id: "runtime-fs-preview",
     projectId: "preview-project",
     deviceId: mockRuntimeState.device.id,
@@ -19,6 +27,16 @@ function createPreviewDeploymentUnit() {
       rules: mockRuntimeState.eventRouter
     }
   });
+  return {
+    ...deployment,
+    skills,
+    routerRules: mockRuntimeState.eventRouter.map((rule) => ({
+      id: rule.id,
+      source: rule.source,
+      action: rule.action,
+      status: rule.status as "draft" | "enabled" | "disabled"
+    }))
+  };
 }
 
 function summarizePackage() {
