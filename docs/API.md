@@ -6,6 +6,17 @@
 GET /health
 ```
 
+## AI Native Readiness
+
+```http
+GET /ai-native/readiness
+GET /ai-native/summary
+GET /ai-native/critical-path
+GET /ai-native/gaps
+```
+
+AI Native Readiness 用于持续追踪 LumiForge 与真正 AI 原生智能硬件平台之间的差距，包括 Agent Core、LLM+Lua、Event Router、Capability Runtime、Local Memory、Skills Lab、MCP、IM、Browser Flash、Claw Dataset 和设备运营。
+
 ## Devices
 
 ```http
