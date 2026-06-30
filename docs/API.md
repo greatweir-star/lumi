@@ -116,9 +116,16 @@ GET /flash/manifests
 GET /flash/manifests/:id
 GET /flash/esp-web-tools/:id
 GET /flash/readiness/:id
+GET /flash/build-plan/:id
 ```
 
-Browser Flash 当前提供固件 manifest、ESP Web Tools 预览 manifest、artifact readiness 和 blocker。真实 binary 缺失时必须保持 `missing_binaries`，不能开放真实写入。
+Browser Flash 当前提供固件 manifest、ESP Web Tools 预览 manifest、artifact readiness、build plan 和 blocker。真实 binary 缺失时必须保持 `missing_binaries`，不能开放真实写入。
+
+命令行查看固件构建计划：
+
+```bash
+pnpm firmware:build-plan
+```
 
 ## Recommendations
 
