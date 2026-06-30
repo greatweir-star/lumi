@@ -5,10 +5,10 @@ import { agentTemplates, devices } from "../lib/mock";
 const pipeline = [
   ["AI Native Readiness", "持续追踪 Agent Core、LLM+Lua、Event Router、Memory、MCP、Browser Flash 等关键缺口。"],
   ["Runtime FS Package", "把 Runtime Profile、Agent Config、Memory Seed、Skills、Router Rules 编译成可灌装设备文件包。"],
+  ["Browser Flash", "生成固件 manifest 与 ESP Web Tools parts，等真实 binary 就能进入浏览器烧录。"],
   ["Claw Dataset", "沉淀硬件 Claw、Runtime Claw、Skill Claw、兼容矩阵和测试结果，这是 LumiForge 最核心资产。"],
   ["Skills Lab", "发现、分享、导入和验证 ESP-Claw / LumiForge 风格的 Skills 与 Lua 脚本。"],
   ["AI Native Runtime", "设备端 Agent Loop、LLM+Lua、事件路由、本地记忆、Skills 和 MCP 双向互联。"],
-  ["一键灌装", "浏览器串口识别设备，写入固件、运行时、设备 ID、Agent 配置与技能包。"],
   ["在线调试", "查看串口日志、系统状态、Capabilities、Lua 模块、文件系统、记忆和技能调用。"],
   ["生态发布", "发布硬件模板、Agent 模板、Skills、Lua 脚本、固件 Profile 和量产烧录包。"]
 ];
@@ -21,9 +21,9 @@ export default function HomePage() {
         <div className="nav-links">
           <a href="/ai-native">AI Native Readiness</a>
           <a href="/runtime-fs">Runtime FS</a>
+          <a href="/flash">Browser Flash</a>
           <a href="/datasets">Claw Dataset</a>
           <a href="/skills-lab">Skills Lab</a>
-          <a href="/capabilities">Capability Catalog</a>
           <a href="/studio">Agent Studio</a>
         </div>
       </nav>
@@ -38,14 +38,14 @@ export default function HomePage() {
           <div className="actions">
             <a className="btn primary" href="/ai-native">查看 AI Native 缺口</a>
             <a className="btn" href="/runtime-fs">查看 Runtime FS 包</a>
-            <a className="btn" href="/skills-lab">进入 Skills Lab</a>
+            <a className="btn" href="/flash">查看浏览器烧录</a>
             <a className="btn" href="/runtime">查看 Runtime Blueprint</a>
           </div>
         </div>
         <div className="panel deploy-card">
           <div className="step"><div className="step-num">1</div><div><h3>AI Native Readiness</h3><p>持续判断离真正设备端 AI 原生还缺哪些 P0 能力。</p></div></div>
           <div className="step"><div className="step-num">2</div><div><h3>Runtime FS Package</h3><p>把配置、记忆、Skills 和规则编译成可写入设备的文件包。</p></div></div>
-          <div className="step"><div className="step-num">3</div><div><h3>纯 C Agent 内核</h3><p>面向智能硬件运行的轻量 Agent Core，而不是只跑在云端的应用。</p></div></div>
+          <div className="step"><div className="step-num">3</div><div><h3>Browser Flash</h3><p>把固件和 Runtime FS manifest 接到浏览器烧录链路。</p></div></div>
         </div>
       </section>
 
