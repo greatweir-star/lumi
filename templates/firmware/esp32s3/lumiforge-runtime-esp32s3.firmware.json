@@ -1,0 +1,69 @@
+{
+  "id": "lumiforge-runtime-esp32s3-preview",
+  "name": "LumiForge Runtime ESP32-S3 Preview",
+  "version": "0.1.0",
+  "targetChip": "ESP32-S3",
+  "chipFamily": "ESP32-S3",
+  "runtime": "lumiforge-runtime",
+  "status": "missing_binaries",
+  "deviceTargets": ["esp32-s3-display-devkit", "m5stack-cores3"],
+  "flashSizeMB": 16,
+  "partitionScheme": "lumiforge_runtime_16mb",
+  "artifacts": [
+    {
+      "name": "bootloader",
+      "offset": "0x0000",
+      "path": "/firmware/esp32s3/bootloader.bin",
+      "url": "/firmware/esp32s3/bootloader.bin",
+      "required": true,
+      "available": false,
+      "notes": "Build from ESP-IDF example before real flashing."
+    },
+    {
+      "name": "partition-table",
+      "offset": "0x8000",
+      "path": "/firmware/esp32s3/partition-table.bin",
+      "url": "/firmware/esp32s3/partition-table.bin",
+      "required": true,
+      "available": false,
+      "notes": "Partition table must include app, nvs, phy_init and runtime_fs partitions."
+    },
+    {
+      "name": "ota-data",
+      "offset": "0xe000",
+      "path": "/firmware/esp32s3/ota_data_initial.bin",
+      "url": "/firmware/esp32s3/ota_data_initial.bin",
+      "required": false,
+      "available": false,
+      "notes": "Optional for OTA-enabled layouts."
+    },
+    {
+      "name": "app",
+      "offset": "0x10000",
+      "path": "/firmware/esp32s3/lumiforge-runtime.bin",
+      "url": "/firmware/esp32s3/lumiforge-runtime.bin",
+      "required": true,
+      "available": false,
+      "notes": "Compiled LumiForge Agent C ESP-IDF app binary."
+    },
+    {
+      "name": "runtime-fs",
+      "offset": "0x3D0000",
+      "path": "/runtime/fs-package/image.bin",
+      "url": "/runtime/fs-package/image.bin",
+      "required": true,
+      "available": false,
+      "notes": "Generated from Runtime FS Package Compiler; not yet converted to FATFS/SPIFFS image."
+    }
+  ],
+  "provisioning": {
+    "runtimeFsPackageEndpoint": "/runtime/fs-package/preview",
+    "manifestEndpoint": "/flash/manifests/lumiforge-runtime-esp32s3-preview",
+    "webToolsEndpoint": "/flash/esp-web-tools/lumiforge-runtime-esp32s3-preview"
+  },
+  "blockers": [
+    "ESP-IDF app binary has not been built.",
+    "Runtime FS package has not been converted to a FATFS/SPIFFS image.",
+    "Browser flash writer is still preview-only."
+  ]
+}
