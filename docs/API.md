@@ -90,6 +90,23 @@ GET /runtime/filesystem
 GET /runtime/web-console-modules
 GET /runtime/state
 GET /runtime/deployment-unit
+GET /runtime/fs-package/preview
+GET /runtime/fs-package/manifest
+GET /runtime/fs-package/files
+```
+
+Runtime FS Package Compiler 会把 Runtime Profile、Agent Config、Capabilities、Memory Seed、Skills Manifest、Router Rules、Scheduler 和 Device Identity 编译成可写入设备文件系统的 manifest + files。
+
+命令行导出：
+
+```bash
+pnpm runtime-fs:pack
+```
+
+输出目录：
+
+```text
+dist/runtime-fs
 ```
 
 ## Recommendations
