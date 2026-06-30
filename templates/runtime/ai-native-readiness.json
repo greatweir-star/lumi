@@ -1,0 +1,150 @@
+{
+  "version": "0.1.0",
+  "generatedFrom": ["README.md", "docs/PRD.md", "docs/ROADMAP.md"],
+  "overallTarget": "AI Native 智能硬件开发平台必须形成从自然语言意图、硬件能力、端侧 Agent Runtime、Skills/Lua、MCP、浏览器烧录到设备运营的数据闭环。",
+  "areas": [
+    {
+      "id": "agent_core",
+      "name": "Agent Core",
+      "target": "设备端 Agent Loop、上下文组装、LLM 工具调用、会话管理。",
+      "current": "已有纯 C Agent Core host demo、事件队列、工具注册、能力注册和记忆抽象。",
+      "status": "partial",
+      "score": 45,
+      "priority": "P0",
+      "missing": ["真实 LLM Provider HTTP adapter", "多轮会话状态", "工具调用协议化", "端侧 prompt/context budget 管理"],
+      "nextActions": ["实现 OpenAI-style / Qwen / DeepSeek HTTP provider adapter", "把 tool call 结果回灌 Agent Loop", "增加 session store 与 context compaction"]
+    },
+    {
+      "id": "llm_lua_engine",
+      "name": "LLM + Lua Engine",
+      "target": "LLM 动态决策，Lua 确定性本地规则执行。",
+      "current": "Runtime Blueprint 和 Skills Lab 已有 Lua 概念，端侧 C Runtime 尚未集成 Lua VM。",
+      "status": "gap",
+      "score": 15,
+      "priority": "P0",
+      "missing": ["Lua VM 嵌入", "lua_run_script tool", "脚本沙箱", "异步脚本任务", "脚本日志与错误回传"],
+      "nextActions": ["在 ESP-IDF port 增加 Lua component adapter", "定义 lua_run_script tool schema", "实现脚本权限和超时模型"]
+    },
+    {
+      "id": "event_router",
+      "name": "Event Router",
+      "target": "按钮、传感器、视觉、语音、IM、定时、系统事件统一路由。",
+      "current": "C Runtime 有固定事件队列；前端 Debugger 有 mock event router rules。",
+      "status": "partial",
+      "score": 35,
+      "priority": "P0",
+      "missing": ["规则 DSL", "事件过滤/匹配", "Router Rule 持久化", "硬件事件 adapter", "调度器触发"],
+      "nextActions": ["新增 router_rules schema", "实现事件规则匹配器", "在 ESP-IDF adapter 接入 button/timer/system events"]
+    },
+    {
+      "id": "capability_runtime",
+      "name": "Capability Runtime",
+      "target": "硬件、系统、网络、IM、MCP、Lua、Skill、文件能力统一注册和启停。",
+      "current": "已有 Capability Catalog、C capability registry、API/页面展示。",
+      "status": "partial",
+      "score": 50,
+      "priority": "P0",
+      "missing": ["能力权限模型", "运行时动态启停", "能力健康检查", "能力到工具映射", "硬件驱动实际绑定"],
+      "nextActions": ["定义 capability manifest runtime schema", "实现 capability health endpoint", "把 capability 映射成 tool registry"]
+    },
+    {
+      "id": "local_memory",
+      "name": "Local Memory",
+      "target": "本地结构化长期记忆、标签索引、用户画像、身份、灵魂文件。",
+      "current": "C Runtime 有文件读写抽象；Runtime FS 有 MEMORY.md/user/soul/identity 布局。",
+      "status": "partial",
+      "score": 40,
+      "priority": "P0",
+      "missing": ["结构化 memory_records.jsonl", "memory index", "memory digest", "隐私权限", "检索接口"],
+      "nextActions": ["实现 memory append/search/digest API", "ESP-IDF FATFS/NVS adapter", "增加隐私红线和敏感字段过滤"]
+    },
+    {
+      "id": "skills_lab",
+      "name": "Skills / Skills Lab",
+      "target": "SKILL.md、脚本、资源、安装、启停、权限和市场化分发。",
+      "current": "已有 Skills Catalog、Skills Lab catalog、ESP-Claw metadata sync、review queue、Skill tests。",
+      "status": "partial",
+      "score": 55,
+      "priority": "P0",
+      "missing": ["安装器", "包签名", "版本管理", "权限弹窗", "从 review queue 转 clean-room rewrite task", "真实设备安装验证"],
+      "nextActions": ["实现 install plan 到 runtime fs package", "新增 skill package version/schema", "做 approve/reject/sandbox 决策流"]
+    },
+    {
+      "id": "mcp",
+      "name": "MCP Server / Client",
+      "target": "设备既能暴露硬件能力，也能主动调用外部服务。",
+      "current": "Runtime Blueprint 有 MCP 配置；C Runtime 尚未实现 MCP transport。",
+      "status": "gap",
+      "score": 10,
+      "priority": "P1",
+      "missing": ["MCP Server", "MCP Client", "tool schema export", "transport", "安全鉴权"],
+      "nextActions": ["定义 device MCP tool manifest", "先在 API/mock runtime 实现 MCP tools registry", "再接 ESP-IDF transport"]
+    },
+    {
+      "id": "im_platform",
+      "name": "IM Platform",
+      "target": "Local Chat、微信、QQ、飞书、Telegram、Custom Webhook 接口层。",
+      "current": "Runtime Blueprint 有 IM 配置，未实现真实 adapter。",
+      "status": "gap",
+      "score": 10,
+      "priority": "P1",
+      "missing": ["Telegram adapter", "飞书/企业微信 webhook", "消息身份映射", "离线队列", "权限配置"],
+      "nextActions": ["先实现 Telegram/custom webhook adapter", "把 IM event 接入 Event Router", "消息写入 session/memory"]
+    },
+    {
+      "id": "web_console_debugger",
+      "name": "Web Console / Device Debugger",
+      "target": "状态、聊天、设置、记忆、Capabilities、Lua 模块、文件、规则、调度、Skills。",
+      "current": "已有 Web 页面和 mock runtime state，Web Serial 基础连接存在。",
+      "status": "partial",
+      "score": 45,
+      "priority": "P0",
+      "missing": ["真实设备协议", "运行时状态同步", "文件系统读写", "Lua 管理", "Capability 动态控制"],
+      "nextActions": ["定义 serial/json-rpc device protocol", "实现 runtime state pull/push", "Debugger 连接真实 C Runtime demo"]
+    },
+    {
+      "id": "runtime_fs_deployment",
+      "name": "Runtime FS / Deployment Unit",
+      "target": "sessions、memory、skills、scripts、router_rules、scheduler、static、inbox 可灌装到设备。",
+      "current": "部署单元结构已有，API 返回 runtime fs seed、skills、claws、router rules。",
+      "status": "partial",
+      "score": 50,
+      "priority": "P0",
+      "missing": ["FS package builder", "manifest hash", "分区/offset", "写入设备", "失败回滚"],
+      "nextActions": ["实现 runtime fs package compiler", "生成 firmware.manifest.json", "接入 Web Serial/ESP Web Tools 写入"]
+    },
+    {
+      "id": "browser_flash",
+      "name": "Browser Flash / Provisioning",
+      "target": "浏览器烧录、配网、灌装 Agent 配置和技能包。",
+      "current": "Firmware adapter 是 mock，Web Serial 有基础 UI；未接 esptool-js 或 ESP Web Tools。",
+      "status": "gap",
+      "score": 15,
+      "priority": "P0",
+      "missing": ["esptool-js", "ESP Web Tools manifest", "bootloader/partition/app offset", "Wi-Fi provisioning", "烧录错误诊断"],
+      "nextActions": ["优先接 ESP Web Tools manifest", "实现 browser flash manifest 页面", "Web Serial 记录芯片识别和烧录日志"]
+    },
+    {
+      "id": "claw_dataset",
+      "name": "Claw Dataset",
+      "target": "硬件 Claw、Runtime Claw、Skill Claw、兼容矩阵、测试结果和来源边界。",
+      "current": "已有 Claw schema、初始 claws、Skill tests、compatibility matrix、review queue。",
+      "status": "partial",
+      "score": 60,
+      "priority": "P0",
+      "missing": ["真实硬件测试结果", "自动评分流水线", "数据版本管理", "Claw pack generator", "供应链/采购信息"],
+      "nextActions": ["实现 claw:new 生成器", "硬件测试结果写回", "兼容矩阵自动更新"]
+    },
+    {
+      "id": "ops_ota",
+      "name": "量产与设备运营 / OTA",
+      "target": "项目保存、批量烧录、OTA、设备分组、远程日志、灰度发布、团队权限。",
+      "current": "目前 API 使用内存项目；没有数据库、OTA 和设备运营。",
+      "status": "gap",
+      "score": 5,
+      "priority": "P2",
+      "missing": ["PostgreSQL", "用户/团队", "设备注册", "OTA 任务", "日志采集", "灰度发布"],
+      "nextActions": ["MVP 后接数据库模型", "设计 device fleet schema", "实现 OTA manifest 和 rollout policy"]
+    }
+  ]
+}
