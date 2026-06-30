@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify";
 import { isInstallAllowed, scoreSkillsLabPackage, SkillsLabPackageSchema } from "@lumiforge/core";
-import { skillsLabImportSnapshots, skillsLabPackages, skillsLabUpstreams } from "./data";
+import { skillsLabImportSnapshots, skillsLabPackages, skillsLabReviewQueue, skillsLabUpstreams } from "./data";
 
 export async function registerSkillsLabRoutes(app: FastifyInstance) {
   app.get("/skills-lab/packages", async () =>
@@ -20,8 +20,14 @@ export async function registerSkillsLabRoutes(app: FastifyInstance) {
   });
 
   app.get("/skills-lab/upstreams", async () => skillsLabUpstreams);
-
   app.get("/skills-lab/imports", async () => skillsLabImportSnapshots);
+  app.get("/skills-lab/review-queue", async () => skillsLabReviewQueue);
+
+  app.get("/skills-lab/review-queue/:id", async (request, reply) => {
+    const { id } = request.params as { id: string };
+    const item = skillsLabReviewQueue.reviews.find((review) => review.id === id || review.importedSkillId === id);
+    return item ?? reply.code(404).send({ message: "Skills Lab review item not found" });
+  });
 
   app.get("/skills-lab/imports/:upstreamId", async (request, reply) => {
     const { upstreamId } = request.params as { upstreamId: string };
@@ -37,7 +43,9 @@ export async function registerSkillsLabRoutes(app: FastifyInstance) {
     highRisk: skillsLabPackages.filter((item) => item.security.riskLevel === "high").length,
     luaFiles: skillsLabPackages.reduce((sum, item) => sum + item.skill.files.filter((file) => file.kind === "lua").length, 0),
     upstreams: skillsLabUpstreams.length,
-    importedMetadata: skillsLabImportSnapshots.reduce((sum, snapshot) => sum + snapshot.items.length, 0)
+    importedMetadata: skillsLabImportSnapshots.reduce((sum, snapshot) => sum + snapshot.items.length, 0),
+    reviewPending: skillsLabReviewQueue.summary.pending ?? 0,
+    reviewHighRisk: skillsLabReviewQueue.summary.highRisk ?? 0
   }));
 
   app.get("/skills-lab/categories", async () => {
