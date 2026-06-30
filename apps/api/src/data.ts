@@ -37,6 +37,30 @@ export type CompatibilityMatrixItem = {
   notes: string;
 };
 
+export type SkillsLabUpstream = {
+  id: string;
+  name: string;
+  type: string;
+  repository: string;
+  branch: string;
+  skillsRoot: string;
+  siteUrl: string;
+  licensePolicy: string;
+  syncMode: string;
+  securityPolicy: Record<string, unknown>;
+  notes: string;
+};
+
+export type SkillsLabImportSnapshot = {
+  upstreamId: string;
+  repository: string;
+  branch: string;
+  syncMode: string;
+  syncedAt: string;
+  totalSkillsDiscovered?: number;
+  items: Array<Record<string, unknown>>;
+};
+
 const root = process.cwd().includes("apps/api") ? join(process.cwd(), "../..") : process.cwd();
 
 export const devices: HardwareTarget[] = JSON.parse(
@@ -74,5 +98,13 @@ export const compatibilityMatrix: CompatibilityMatrixItem[] = JSON.parse(
 export const skillsLabPackages: SkillsLabPackage[] = JSON.parse(
   readFileSync(join(root, "datasets/skills-lab/skills-lab.json"), "utf-8")
 );
+
+export const skillsLabUpstreams: SkillsLabUpstream[] = JSON.parse(
+  readFileSync(join(root, "datasets/skills-lab/upstreams.json"), "utf-8")
+);
+
+export const skillsLabImportSnapshots: SkillsLabImportSnapshot[] = [
+  JSON.parse(readFileSync(join(root, "datasets/skills-lab/imports/esp-claw-skills-lab.metadata.json"), "utf-8"))
+];
 
 export const projects = new Map<string, Project>();
