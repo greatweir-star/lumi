@@ -9,6 +9,7 @@
     "lint": "pnpm -r lint",
     "typecheck": "pnpm -r typecheck",
     "format": "prettier --write .",
+    "runtime-fs:pack": "node tools/runtime-fs-pack.mjs",
     "claw:stats": "node tools/clawctl.mjs stats",
     "claw:validate": "node tools/clawctl.mjs validate",
     "claw:test": "node tools/clawctl.mjs test",
