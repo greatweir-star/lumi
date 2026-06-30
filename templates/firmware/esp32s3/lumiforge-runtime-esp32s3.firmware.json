@@ -9,11 +9,14 @@
   "deviceTargets": ["esp32-s3-display-devkit", "m5stack-cores3"],
   "flashSizeMB": 16,
   "partitionScheme": "lumiforge_runtime_16mb",
+  "partitionTable": "/firmware/lumiforge-agent-c/examples/esp_idf_agent_demo/partitions.csv",
+  "buildProject": "/firmware/lumiforge-agent-c/examples/esp_idf_agent_demo",
   "artifacts": [
     {
       "name": "bootloader",
       "offset": "0x0000",
       "path": "/firmware/esp32s3/bootloader.bin",
+      "buildOutput": "build/bootloader/bootloader.bin",
       "url": "/firmware/esp32s3/bootloader.bin",
       "required": true,
       "available": false,
@@ -23,15 +26,17 @@
       "name": "partition-table",
       "offset": "0x8000",
       "path": "/firmware/esp32s3/partition-table.bin",
+      "buildOutput": "build/partition_table/partition-table.bin",
       "url": "/firmware/esp32s3/partition-table.bin",
       "required": true,
       "available": false,
-      "notes": "Partition table must include app, nvs, phy_init and runtime_fs partitions."
+      "notes": "Partition table must include app, nvs, phy_init, runtimefs and storage partitions."
     },
     {
       "name": "ota-data",
       "offset": "0xe000",
       "path": "/firmware/esp32s3/ota_data_initial.bin",
+      "buildOutput": "build/ota_data_initial.bin",
       "url": "/firmware/esp32s3/ota_data_initial.bin",
       "required": false,
       "available": false,
@@ -39,8 +44,9 @@
     },
     {
       "name": "app",
-      "offset": "0x10000",
+      "offset": "0x20000",
       "path": "/firmware/esp32s3/lumiforge-runtime.bin",
+      "buildOutput": "build/lumiforge_esp_idf_agent_demo.bin",
       "url": "/firmware/esp32s3/lumiforge-runtime.bin",
       "required": true,
       "available": false,
@@ -48,8 +54,9 @@
     },
     {
       "name": "runtime-fs",
-      "offset": "0x3D0000",
+      "offset": "0x210000",
       "path": "/runtime/fs-package/image.bin",
+      "buildOutput": "dist/runtime-fs/runtimefs.bin",
       "url": "/runtime/fs-package/image.bin",
       "required": true,
       "available": false,
