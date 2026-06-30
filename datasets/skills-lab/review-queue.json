@@ -1,0 +1,108 @@
+{
+  "upstreamId": "esp-claw-skills-lab",
+  "generatedAt": "2026-06-30T00:00:00.000Z",
+  "summary": {
+    "total": 3,
+    "highRisk": 1,
+    "mediumRisk": 2,
+    "pending": 3
+  },
+  "reviews": [
+    {
+      "id": "review_esp_claw_codex_usage_dashboard",
+      "importedSkillId": "esp_claw_codex_usage_dashboard",
+      "upstreamSkillId": "codex_usage_dashboard",
+      "title": "Codex Usage Dashboard",
+      "riskLevel": "medium",
+      "recommendedStatus": "manual_review",
+      "findings": [
+        {
+          "ruleId": "network_http",
+          "severity": "medium",
+          "message": "Uses network or HTTP behavior. Review outbound/inbound endpoints and credential handling.",
+          "matchedTerms": ["cap_http_request", "endpoint", "url"]
+        },
+        {
+          "ruleId": "display_only",
+          "severity": "low",
+          "message": "Display-oriented skill. Still review remote data sources and rendering loop stability.",
+          "matchedTerms": ["display", "dashboard"]
+        }
+      ],
+      "decision": "pending",
+      "reviewer": null,
+      "reviewedAt": null,
+      "source": {
+        "repository": "espressif/esp-claw-skills-lab",
+        "path": "skills/codex_usage_dashboard/SKILL.md",
+        "url": "https://github.com/espressif/esp-claw-skills-lab/tree/master/skills/codex_usage_dashboard"
+      }
+    },
+    {
+      "id": "review_esp_claw_servo_dog",
+      "importedSkillId": "esp_claw_servo_dog",
+      "upstreamSkillId": "servo_dog",
+      "title": "Servo Dog",
+      "riskLevel": "high",
+      "recommendedStatus": "sandbox_required",
+      "findings": [
+        {
+          "ruleId": "hardware_motion",
+          "severity": "high",
+          "message": "Controls physical movement or hardware pins. Test only on a bench with safe limits.",
+          "matchedTerms": ["servo", "pwm"]
+        },
+        {
+          "ruleId": "network_http",
+          "severity": "medium",
+          "message": "Uses network or HTTP behavior. Review outbound/inbound endpoints and credential handling.",
+          "matchedTerms": ["server"]
+        }
+      ],
+      "decision": "pending",
+      "reviewer": null,
+      "reviewedAt": null,
+      "source": {
+        "repository": "espressif/esp-claw-skills-lab",
+        "path": "skills/servo_dog/SKILL.md",
+        "url": "https://github.com/espressif/esp-claw-skills-lab/tree/master/skills/servo_dog"
+      }
+    },
+    {
+      "id": "review_esp_claw_token_usage",
+      "importedSkillId": "esp_claw_token_usage",
+      "upstreamSkillId": "token_usage",
+      "title": "Token Usage",
+      "riskLevel": "medium",
+      "recommendedStatus": "manual_review",
+      "findings": [
+        {
+          "ruleId": "installer_behavior",
+          "severity": "medium",
+          "message": "Installer or auto-start behavior detected. Review persistence, boot rules and rollback.",
+          "matchedTerms": ["install", "schedule"]
+        },
+        {
+          "ruleId": "memory_write",
+          "severity": "medium",
+          "message": "May write or expose memory, tokens or telemetry. Review data retention and redaction.",
+          "matchedTerms": ["memory", "token"]
+        },
+        {
+          "ruleId": "display_only",
+          "severity": "low",
+          "message": "Display-oriented skill. Still review remote data sources and rendering loop stability.",
+          "matchedTerms": ["display", "dashboard"]
+        }
+      ],
+      "decision": "pending",
+      "reviewer": null,
+      "reviewedAt": null,
+      "source": {
+        "repository": "espressif/esp-claw-skills-lab",
+        "path": "skills/token_usage/SKILL.md",
+        "url": "https://github.com/espressif/esp-claw-skills-lab/tree/master/skills/token_usage"
+      }
+    }
+  ]
+}
