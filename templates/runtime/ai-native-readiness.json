@@ -117,12 +117,12 @@
       "id": "browser_flash",
       "name": "Browser Flash / Provisioning",
       "target": "浏览器烧录、配网、灌装 Agent 配置和技能包。",
-      "current": "Firmware adapter 是 mock，Web Serial 有基础 UI；未接 esptool-js 或 ESP Web Tools。",
-      "status": "gap",
-      "score": 15,
+      "current": "已新增 LumiForge firmware manifest、ESP Web Tools preview manifest、artifact readiness API 和 Browser Flash 预览页；真实 binary 缺失时保持 missing_binaries。",
+      "status": "partial",
+      "score": 35,
       "priority": "P0",
-      "missing": ["esptool-js", "ESP Web Tools manifest", "bootloader/partition/app offset", "Wi-Fi provisioning", "烧录错误诊断"],
-      "nextActions": ["优先接 ESP Web Tools manifest", "实现 browser flash manifest 页面", "Web Serial 记录芯片识别和烧录日志"]
+      "missing": ["真实 bootloader/partition/app binary", "runtime-fs FATFS/SPIFFS image", "esptool-js writer", "Wi-Fi provisioning", "烧录错误诊断"],
+      "nextActions": ["构建 ESP-IDF app binary", "把 Runtime FS Package 转 FATFS/SPIFFS image", "接入 Web Serial/ESP Web Tools 写入器"]
     },
     {
       "id": "claw_dataset",
