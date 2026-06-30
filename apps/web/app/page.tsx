@@ -3,6 +3,7 @@ import { TemplateCard } from "../components/template-card";
 import { agentTemplates, devices } from "../lib/mock";
 
 const pipeline = [
+  ["AI Native Readiness", "持续追踪 Agent Core、LLM+Lua、Event Router、Memory、MCP、Browser Flash 等关键缺口。"],
   ["Claw Dataset", "沉淀硬件 Claw、Runtime Claw、Skill Claw、兼容矩阵和测试结果，这是 LumiForge 最核心资产。"],
   ["Skills Lab", "发现、分享、导入和验证 ESP-Claw / LumiForge 风格的 Skills 与 Lua 脚本。"],
   ["AI Native Runtime", "设备端 Agent Loop、LLM+Lua、事件路由、本地记忆、Skills 和 MCP 双向互联。"],
@@ -17,6 +18,7 @@ export default function HomePage() {
       <nav className="nav">
         <div className="brand"><div className="logo" /> 灵机工坊 LumiForge</div>
         <div className="nav-links">
+          <a href="/ai-native">AI Native Readiness</a>
           <a href="/datasets">Claw Dataset</a>
           <a href="/skills-lab">Skills Lab</a>
           <a href="/capabilities">Capability Catalog</a>
@@ -33,16 +35,15 @@ export default function HomePage() {
             LumiForge 的长期价值来自高质量 Claw 数据集和 Skills Lab：持续收集、适配、重写真实硬件 Claw，沉淀 Board Profile、Runtime Profile、Skills/Lua、兼容矩阵、测试结果和来源边界。
           </p>
           <div className="actions">
-            <a className="btn primary" href="/skills-lab">进入 Skills Lab</a>
+            <a className="btn primary" href="/ai-native">查看 AI Native 缺口</a>
+            <a className="btn" href="/skills-lab">进入 Skills Lab</a>
             <a className="btn" href="/datasets">查看 Claw 数据集</a>
-            <a className="btn" href="/studio">进入 Agent Studio</a>
-            <a className="btn" href="/capabilities">查看能力重构</a>
             <a className="btn" href="/runtime">查看 Runtime Blueprint</a>
           </div>
         </div>
         <div className="panel deploy-card">
-          <div className="step"><div className="step-num">1</div><div><h3>Claw 数据集</h3><p>记录硬件、Runtime、Skills、测试、兼容性和 clean-room rewrite 边界。</p></div></div>
-          <div className="step"><div className="step-num">2</div><div><h3>Skills Lab</h3><p>社区发现和分享 Skills / Lua，验证后进入 Claw Dataset。</p></div></div>
+          <div className="step"><div className="step-num">1</div><div><h3>AI Native Readiness</h3><p>持续判断离真正设备端 AI 原生还缺哪些 P0 能力。</p></div></div>
+          <div className="step"><div className="step-num">2</div><div><h3>Claw 数据集</h3><p>记录硬件、Runtime、Skills、测试、兼容性和 clean-room rewrite 边界。</p></div></div>
           <div className="step"><div className="step-num">3</div><div><h3>纯 C Agent 内核</h3><p>面向智能硬件运行的轻量 Agent Core，而不是只跑在云端的应用。</p></div></div>
         </div>
       </section>
