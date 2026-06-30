@@ -106,12 +106,12 @@
       "id": "runtime_fs_deployment",
       "name": "Runtime FS / Deployment Unit",
       "target": "sessions、memory、skills、scripts、router_rules、scheduler、static、inbox 可灌装到设备。",
-      "current": "部署单元结构已有，API 返回 runtime fs seed、skills、claws、router rules。",
+      "current": "部署单元结构、Runtime FS Package Compiler、manifest、checksum、API preview 和 CLI 导出已完成，仍未写入真实设备。",
       "status": "partial",
-      "score": 50,
+      "score": 65,
       "priority": "P0",
-      "missing": ["FS package builder", "manifest hash", "分区/offset", "写入设备", "失败回滚"],
-      "nextActions": ["实现 runtime fs package compiler", "生成 firmware.manifest.json", "接入 Web Serial/ESP Web Tools 写入"]
+      "missing": ["分区/offset", "写入设备", "失败回滚", "二进制资源包", "签名校验"],
+      "nextActions": ["生成 firmware.manifest.json", "接入 Web Serial/ESP Web Tools 写入", "把 Skills Lab install plan 编译进 Runtime FS Package"]
     },
     {
       "id": "browser_flash",
