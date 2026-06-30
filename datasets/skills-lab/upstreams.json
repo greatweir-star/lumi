@@ -1,0 +1,20 @@
+[
+  {
+    "id": "esp-claw-skills-lab",
+    "name": "ESP-Claw Skills Lab",
+    "type": "github_repo",
+    "repository": "espressif/esp-claw-skills-lab",
+    "branch": "master",
+    "skillsRoot": "skills",
+    "siteUrl": "https://skills-lab.esp-claw.com",
+    "licensePolicy": "MIT-compatible-required-before-redistribution",
+    "syncMode": "metadata_only",
+    "securityPolicy": {
+      "downloadLuaByDefault": false,
+      "executeLuaByDefault": false,
+      "defaultReviewStatus": "unreviewed",
+      "defaultRiskLevel": "unknown"
+    },
+    "notes": "Import SKILL.md frontmatter, tags, file paths, and source pointers only. Do not install or execute third-party Lua until license, security, and compatibility checks pass."
+  }
+]
