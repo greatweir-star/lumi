@@ -1,0 +1,102 @@
+{
+  "upstreamId": "esp-claw-skills-lab",
+  "repository": "espressif/esp-claw-skills-lab",
+  "branch": "master",
+  "syncMode": "metadata_only",
+  "syncedAt": "2026-06-30T00:00:00.000Z",
+  "items": [
+    {
+      "id": "esp_claw_codex_usage_dashboard",
+      "upstreamSkillId": "codex_usage_dashboard",
+      "name": "codex_usage_dashboard",
+      "title": "Codex Usage Dashboard",
+      "description": "Show a Codex usage quota dashboard on the board display from a configured JSON endpoint, including 5-hour and weekly reset status.",
+      "author": "",
+      "metadata": {
+        "category": ["utility", "ai"],
+        "tags": ["codex", "usage", "quota", "dashboard"],
+        "peripherals": ["display"],
+        "cap_groups": ["cap_lua", "cap_http_request", "cap_time"],
+        "manage_mode": "web"
+      },
+      "files": ["SKILL.md"],
+      "extraFiles": {
+        "references": [],
+        "scripts": ["codex_usage_dashboard.lua"],
+        "assets": []
+      },
+      "source": {
+        "repository": "espressif/esp-claw-skills-lab",
+        "path": "skills/codex_usage_dashboard/SKILL.md",
+        "url": "https://github.com/espressif/esp-claw-skills-lab/tree/master/skills/codex_usage_dashboard"
+      },
+      "security": {
+        "reviewStatus": "unreviewed",
+        "riskLevel": "unknown",
+        "warnings": ["Metadata imported only. Third-party Lua must be reviewed before install or redistribution."]
+      }
+    },
+    {
+      "id": "esp_claw_servo_dog",
+      "upstreamSkillId": "servo_dog",
+      "name": "servo_dog",
+      "title": "Servo Dog",
+      "description": "Control a four-servo robotic dog named Servo Dog through Lua PWM actions, command calls, and a Lua HTTP Server web control panel.",
+      "author": "",
+      "metadata": {
+        "cap_groups": ["cap_lua"],
+        "manage_mode": "readonly",
+        "category": ["game"],
+        "tags": ["servo", "ai"],
+        "peripherals": []
+      },
+      "files": ["SKILL.md"],
+      "extraFiles": {
+        "references": [],
+        "scripts": ["servo_dog_server.lua", "servo_dog_worker.lua", "servo_dog_command.lua"],
+        "assets": []
+      },
+      "source": {
+        "repository": "espressif/esp-claw-skills-lab",
+        "path": "skills/servo_dog/SKILL.md",
+        "url": "https://github.com/espressif/esp-claw-skills-lab/tree/master/skills/servo_dog"
+      },
+      "security": {
+        "reviewStatus": "unreviewed",
+        "riskLevel": "unknown",
+        "warnings": ["Metadata imported only. Servo/PWM control can move hardware and must be reviewed on a test bench."]
+      }
+    },
+    {
+      "id": "esp_claw_token_usage",
+      "upstreamSkillId": "token_usage",
+      "name": "token_usage",
+      "title": "Token Usage",
+      "description": "Install, show, open, or close the token usage dashboard on the board display. Shows Cursor/Codex activity, Deepseek balance, standing reminders, and weather.",
+      "author": "",
+      "metadata": {
+        "cap_groups": ["cap_lua"],
+        "manage_mode": "web",
+        "category": ["utility", "ai"],
+        "peripherals": ["display"],
+        "tags": ["cursor", "deepseek", "dashboard", "token", "install", "standing"]
+      },
+      "files": ["SKILL.md"],
+      "extraFiles": {
+        "references": [],
+        "scripts": ["install_token.lua", "token_usage_dashboard.lua", "token_usage_config.lua"],
+        "assets": []
+      },
+      "source": {
+        "repository": "espressif/esp-claw-skills-lab",
+        "path": "skills/token_usage/SKILL.md",
+        "url": "https://github.com/espressif/esp-claw-skills-lab/tree/master/skills/token_usage"
+      },
+      "security": {
+        "reviewStatus": "unreviewed",
+        "riskLevel": "unknown",
+        "warnings": ["Metadata imported only. This skill mentions installer behavior, schedules, memory snapshots, and HTTP host access; review before install."]
+      }
+    }
+  ]
+}
