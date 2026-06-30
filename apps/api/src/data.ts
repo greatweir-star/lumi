@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { AiNativeRuntimeBlueprint, SkillTestCase } from "@lumiforge/agent-runtime";
-import type { AgentTemplate, ClawPackage, HardwareTarget, Project, SkillsLabPackage } from "@lumiforge/core";
+import type { AgentTemplate, AiNativeReadiness, ClawPackage, HardwareTarget, Project, SkillsLabPackage } from "@lumiforge/core";
 
 export type CapabilityCatalogItem = {
   id: string;
@@ -81,6 +81,10 @@ export const agentTemplates: AgentTemplate[] = JSON.parse(
 export const runtimeBlueprints: AiNativeRuntimeBlueprint[] = [
   JSON.parse(readFileSync(join(root, "templates/runtime/esp-claw-compatible.json"), "utf-8"))
 ];
+
+export const aiNativeReadiness: AiNativeReadiness = JSON.parse(
+  readFileSync(join(root, "templates/runtime/ai-native-readiness.json"), "utf-8")
+);
 
 export const capabilityCatalog: CapabilityCatalogItem[] = JSON.parse(
   readFileSync(join(root, "templates/runtime/capability-catalog.json"), "utf-8")
