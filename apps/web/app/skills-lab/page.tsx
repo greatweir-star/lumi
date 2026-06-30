@@ -1,4 +1,4 @@
-import { skillsLabImportSnapshot, skillsLabUpstreams } from "../../lib/skills-lab-imports";
+import { skillsLabImportSnapshot, skillsLabReviewQueue, skillsLabUpstreams } from "../../lib/skills-lab-imports";
 import { computeSkillsLabStats, skillsLabPackages } from "../../lib/skills-lab";
 
 export default function SkillsLabPage() {
@@ -33,7 +33,7 @@ export default function SkillsLabPage() {
         <div className="panel deploy-card">
           <div className="step"><div className="step-num">{stats.packages}</div><div><h3>Lab Packages</h3><p>社区 Skill、Lua、Bundle 和模板包。</p></div></div>
           <div className="step"><div className="step-num">{skillsLabImportSnapshot.items.length}</div><div><h3>Imported Metadata</h3><p>来自上游 Skills Lab 的 metadata-only 导入。</p></div></div>
-          <div className="step"><div className="step-num">{stats.unreviewed}</div><div><h3>Unreviewed</h3><p>未审查包默认只做 metadata-only，不直接安装。</p></div></div>
+          <div className="step"><div className="step-num">{skillsLabReviewQueue.summary.pending}</div><div><h3>Review Pending</h3><p>等待许可证、安全、兼容性和沙箱审核。</p></div></div>
         </div>
       </section>
 
@@ -60,6 +60,20 @@ export default function SkillsLabPage() {
               <div className="tags"><span className="tag">{item.source.type}</span><span className="tag">{item.quality.status}</span><span className="tag">score {item.quality.score}</span><span className="tag">risk {item.security.riskLevel}</span></div>
               <div className="tags">{item.skill.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div>
               <div className="tags">{item.security.permissions.slice(0, 4).map((permission) => <span className="tag" key={permission}>{permission}</span>)}</div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <div className="section-title"><div><h2>Review Queue</h2><p>自动风险扫描结果，只决定下一步审核动作，不直接允许安装。</p></div></div>
+        <div className="grid">
+          {skillsLabReviewQueue.reviews.map((review) => (
+            <article className="card" key={review.id}>
+              <h3>{review.title}</h3>
+              <p>{review.upstreamSkillId} · {review.recommendedStatus}</p>
+              <div className="tags"><span className="tag">risk {review.riskLevel}</span><span className="tag">{review.decision}</span><span className="tag">{review.findings.length} findings</span></div>
+              <div className="tags">{review.findings.slice(0, 3).map((finding) => <span className="tag" key={finding.ruleId}>{finding.ruleId}:{finding.severity}</span>)}</div>
             </article>
           ))}
         </div>
