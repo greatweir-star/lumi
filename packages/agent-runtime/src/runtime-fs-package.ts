@@ -60,8 +60,18 @@ function normalizePath(root: string, path: string) {
   return normalized.startsWith(cleanRoot) ? normalized : `${cleanRoot}${normalized}`;
 }
 
-function stableJson(value: unknown): string {
-  return `${JSON.stringify(value, Object.keys(value as Record<string, unknown>).sort(), 2)}\n`;
+function utf8ByteLength(value: string) {
+  return Array.from(value).reduce((size, char) => size + encodeURIComponent(char).replace(/%[A-F\d]{2}/g, "U").length, 0);
+}
+
+function stableStringify(value: unknown): string {
+  if (value === null || typeof value !== "object") return JSON.stringify(value);
+  if (Array.isArray(value)) return `[${value.map((item) => stableStringify(item)).join(",")}]`;
+  const object = value as Record<string, unknown>;
+  return `{${Object.keys(object)
+    .sort()
+    .map((key) => `${JSON.stringify(key)}:${stableStringify(object[key])}`)
+    .join(",")}}`;
 }
 
 function jsonFile(value: unknown): string {
@@ -83,7 +93,7 @@ function makeFile(root: string, path: string, kind: RuntimeFsPackageFileKind, co
     path: normalizedPath,
     kind,
     content,
-    sizeBytes: new TextEncoder().encode(content).length,
+    sizeBytes: utf8ByteLength(content),
     checksum: fnv1a32(`${normalizedPath}\n${kind}\n${content}`)
   };
 }
@@ -143,11 +153,11 @@ export function compileRuntimeFsPackage(
     checksumAlgorithm: "fnv1a32" as const,
     files: manifestFiles
   };
-  const checksum = fnv1a32(stableJson(manifestWithoutChecksum));
+  const checksum = fnv1a32(stableStringify(manifestWithoutChecksum));
   const manifest: RuntimeFsPackageManifest = {
     ...manifestWithoutChecksum,
     checksum,
-    totalSizeBytes: totalSizeBytes + new TextEncoder().encode(jsonFile({ ...manifestWithoutChecksum, checksum })).length
+    totalSizeBytes: totalSizeBytes + utf8ByteLength(jsonFile({ ...manifestWithoutChecksum, checksum }))
   };
   const manifestFile = makeFile(root, ".lumiforge/runtime-fs.manifest.json", "manifest", jsonFile(manifest));
   const finalFiles = [manifestFile, ...sortedFiles].sort((a, b) => a.path.localeCompare(b.path));
