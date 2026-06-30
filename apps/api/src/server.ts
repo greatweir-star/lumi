@@ -1,6 +1,7 @@
 import cors from "@fastify/cors";
 import Fastify from "fastify";
 import { registerAiNativeRoutes } from "./ai-native-routes";
+import { registerFlashRoutes } from "./flash-routes";
 import { registerRuntimeFsRoutes } from "./runtime-fs-routes";
 import { registerRoutes } from "./routes";
 
@@ -8,6 +9,7 @@ const app = Fastify({ logger: true });
 await app.register(cors, { origin: true });
 await registerAiNativeRoutes(app);
 await registerRuntimeFsRoutes(app);
+await registerFlashRoutes(app);
 await registerRoutes(app);
 
 const port = Number(process.env.LUMIFORGE_API_PORT ?? 8787);
