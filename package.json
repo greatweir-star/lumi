@@ -14,7 +14,8 @@
     "claw:test": "node tools/clawctl.mjs test",
     "claw:write-result": "node tools/clawctl.mjs write-result",
     "skills-lab:sync": "node tools/skills-lab-sync.mjs",
-    "skills-lab:sync:sample": "node tools/skills-lab-sync.mjs --limit=5"
+    "skills-lab:sync:sample": "node tools/skills-lab-sync.mjs --limit=5",
+    "skills-lab:review": "node tools/skills-lab-review.mjs"
   },
   "packageManager": "pnpm@9.12.0",
   "devDependencies": {
