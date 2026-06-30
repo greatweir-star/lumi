@@ -32,6 +32,9 @@ GET /skills/:id
 ```http
 GET /skills-lab/packages
 GET /skills-lab/packages/:id
+GET /skills-lab/upstreams
+GET /skills-lab/imports
+GET /skills-lab/imports/:upstreamId
 GET /skills-lab/stats
 GET /skills-lab/categories
 GET /skills-lab/share-template
@@ -40,6 +43,15 @@ POST /skills-lab/packages/:id/install-plan
 ```
 
 Skills Lab 是社区 Skill / Lua 市场。第三方包默认需要经过来源、许可证、权限、风险和兼容性检查后才能安装。
+
+在线同步器：
+
+```bash
+pnpm skills-lab:sync
+pnpm skills-lab:sync:sample
+```
+
+同步器只导入 `SKILL.md` 元数据、文件路径、标签和来源指针，不默认复制或执行第三方 Lua。
 
 ## Claw Dataset
 
