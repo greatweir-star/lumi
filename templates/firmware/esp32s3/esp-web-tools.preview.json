@@ -1,0 +1,40 @@
+{
+  "name": "LumiForge Runtime ESP32-S3 Preview",
+  "version": "0.1.0",
+  "home_assistant_domain": "lumiforge",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "improv": false,
+      "parts": [
+        {
+          "path": "/firmware/esp32s3/bootloader.bin",
+          "offset": 0
+        },
+        {
+          "path": "/firmware/esp32s3/partition-table.bin",
+          "offset": 32768
+        },
+        {
+          "path": "/firmware/esp32s3/ota_data_initial.bin",
+          "offset": 57344
+        },
+        {
+          "path": "/firmware/esp32s3/lumiforge-runtime.bin",
+          "offset": 65536
+        },
+        {
+          "path": "/runtime/fs-package/image.bin",
+          "offset": 3997696
+        }
+      ]
+    }
+  ],
+  "x_lumiforge": {
+    "status": "missing_binaries",
+    "firmwareManifestId": "lumiforge-runtime-esp32s3-preview",
+    "runtimeFsPackageEndpoint": "/runtime/fs-package/preview",
+    "notes": "Preview-only ESP Web Tools manifest. Binary paths and offsets are placeholders until ESP-IDF build artifacts and runtime FS image are produced."
+  }
+}
