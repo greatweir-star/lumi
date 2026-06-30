@@ -61,6 +61,13 @@ export type SkillsLabImportSnapshot = {
   items: Array<Record<string, unknown>>;
 };
 
+export type SkillsLabReviewQueue = {
+  upstreamId: string;
+  generatedAt: string;
+  summary: Record<string, number>;
+  reviews: Array<Record<string, unknown>>;
+};
+
 const root = process.cwd().includes("apps/api") ? join(process.cwd(), "../..") : process.cwd();
 
 export const devices: HardwareTarget[] = JSON.parse(
@@ -106,5 +113,9 @@ export const skillsLabUpstreams: SkillsLabUpstream[] = JSON.parse(
 export const skillsLabImportSnapshots: SkillsLabImportSnapshot[] = [
   JSON.parse(readFileSync(join(root, "datasets/skills-lab/imports/esp-claw-skills-lab.metadata.json"), "utf-8"))
 ];
+
+export const skillsLabReviewQueue: SkillsLabReviewQueue = JSON.parse(
+  readFileSync(join(root, "datasets/skills-lab/review-queue.json"), "utf-8")
+);
 
 export const projects = new Map<string, Project>();
