@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify";
 import { isInstallAllowed, scoreSkillsLabPackage, SkillsLabPackageSchema } from "@lumiforge/core";
-import { skillsLabPackages } from "./data";
+import { skillsLabImportSnapshots, skillsLabPackages, skillsLabUpstreams } from "./data";
 
 export async function registerSkillsLabRoutes(app: FastifyInstance) {
   app.get("/skills-lab/packages", async () =>
@@ -19,13 +19,25 @@ export async function registerSkillsLabRoutes(app: FastifyInstance) {
       : reply.code(404).send({ message: "Skills Lab package not found" });
   });
 
+  app.get("/skills-lab/upstreams", async () => skillsLabUpstreams);
+
+  app.get("/skills-lab/imports", async () => skillsLabImportSnapshots);
+
+  app.get("/skills-lab/imports/:upstreamId", async (request, reply) => {
+    const { upstreamId } = request.params as { upstreamId: string };
+    const snapshot = skillsLabImportSnapshots.find((item) => item.upstreamId === upstreamId);
+    return snapshot ?? reply.code(404).send({ message: "Skills Lab import snapshot not found" });
+  });
+
   app.get("/skills-lab/stats", async () => ({
     packages: skillsLabPackages.length,
     approved: skillsLabPackages.filter((item) => item.quality.status === "approved").length,
     reviewing: skillsLabPackages.filter((item) => item.quality.status === "reviewing").length,
     unreviewed: skillsLabPackages.filter((item) => item.security.reviewStatus === "unreviewed").length,
     highRisk: skillsLabPackages.filter((item) => item.security.riskLevel === "high").length,
-    luaFiles: skillsLabPackages.reduce((sum, item) => sum + item.skill.files.filter((file) => file.kind === "lua").length, 0)
+    luaFiles: skillsLabPackages.reduce((sum, item) => sum + item.skill.files.filter((file) => file.kind === "lua").length, 0),
+    upstreams: skillsLabUpstreams.length,
+    importedMetadata: skillsLabImportSnapshots.reduce((sum, snapshot) => sum + snapshot.items.length, 0)
   }));
 
   app.get("/skills-lab/categories", async () => {
@@ -33,6 +45,13 @@ export async function registerSkillsLabRoutes(app: FastifyInstance) {
     for (const item of skillsLabPackages) {
       for (const category of item.skill.category ?? []) categories.set(category, (categories.get(category) ?? 0) + 1);
       for (const tag of item.skill.tags ?? []) categories.set(tag, (categories.get(tag) ?? 0) + 1);
+    }
+    for (const snapshot of skillsLabImportSnapshots) {
+      for (const item of snapshot.items) {
+        const metadata = (item.metadata ?? {}) as { category?: string[]; tags?: string[] };
+        for (const category of metadata.category ?? []) categories.set(category, (categories.get(category) ?? 0) + 1);
+        for (const tag of metadata.tags ?? []) categories.set(tag, (categories.get(tag) ?? 0) + 1);
+      }
     }
     return Array.from(categories.entries()).map(([id, count]) => ({ id, count }));
   });
