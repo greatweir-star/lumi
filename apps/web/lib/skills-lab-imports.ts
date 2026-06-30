@@ -1,4 +1,5 @@
 import importsJson from "../../../datasets/skills-lab/imports/esp-claw-skills-lab.metadata.json";
+import reviewQueueJson from "../../../datasets/skills-lab/review-queue.json";
 import upstreamsJson from "../../../datasets/skills-lab/upstreams.json";
 
 export type SkillsLabImportItem = {
@@ -57,5 +58,36 @@ export type SkillsLabUpstream = {
   notes: string;
 };
 
+export type SkillsLabReview = {
+  id: string;
+  importedSkillId: string;
+  upstreamSkillId: string;
+  title: string;
+  riskLevel: "low" | "medium" | "high" | "unknown";
+  recommendedStatus: "metadata_only" | "manual_review" | "sandbox_required" | "blocked";
+  findings: Array<{
+    ruleId: string;
+    severity: "low" | "medium" | "high";
+    message: string;
+    matchedTerms: string[];
+  }>;
+  decision: string;
+  reviewer: string | null;
+  reviewedAt: string | null;
+  source: {
+    repository: string;
+    path: string;
+    url: string;
+  };
+};
+
+export type SkillsLabReviewQueue = {
+  upstreamId: string;
+  generatedAt: string;
+  summary: Record<string, number>;
+  reviews: SkillsLabReview[];
+};
+
 export const skillsLabImportSnapshot = importsJson as SkillsLabImportSnapshot;
+export const skillsLabReviewQueue = reviewQueueJson as SkillsLabReviewQueue;
 export const skillsLabUpstreams = upstreamsJson as SkillsLabUpstream[];
